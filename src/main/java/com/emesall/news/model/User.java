@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -32,9 +30,6 @@ public class User extends BaseEntity implements UserDetails {
 	@NotBlank
 	private String email;
 	
-	@NotBlank
-	private String username;
-
 	@NotBlank
 	private String password;
 
@@ -71,6 +66,11 @@ public class User extends BaseEntity implements UserDetails {
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return false;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
 	}
 	
 
