@@ -1,11 +1,25 @@
-.navbar,
-.navbar > .container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  @media (max-width: 768px) {
-    display: block;
-  }
+@font-face {
+	font-family: TitleFont;
+	src: url('KdamThmorPro-Regular.ttf');
+}
+
+.news-title {
+	text-transform: uppercase;
+	margin: 0 0 10px;
+}
+
+.news-fragment{
+max-width:90%;
+margin:0 auto;
+}
+
+.news-fragment p {
+	font-size: .9em;
+	line-height: 1.6em;
+	font-weight: inherit;
+	margin: 1.6rem 0 0;
+	
+}
+.font-default{
+	font-family: TitleFont;
 }
