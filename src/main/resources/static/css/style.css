@@ -3,23 +3,99 @@
 	src: url('KdamThmorPro-Regular.ttf');
 }
 
+@font-face {
+	font-family: NewsFont;
+	src: url('shadows.ttf');
+}
+
+:root {
+--black:#000;
+--white:#fff;
+--gray:#d4d4d4;
+--background:#fff;
+--color:#222;
+}
+
+.news {
+	position: relative;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+	text-align: justify;
+	letter-spacing: -.4px;
+	margin: 4rem auto 0;
+}
+
+.news-header {
+	text-align: center;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
 .news-title {
 	text-transform: uppercase;
 	margin: 0 0 10px;
+	letter-spacing: -.02em;
 }
 
-.news-fragment{
-max-width:90%;
-margin:0 auto;
+.news-title a {
+	text-decoration: none;
+	color:var(--color);
+	transition: opacity .3s ease;
+}
+
+.news-title a:hover {
+	opacity: 90%;
+	color: gray;
+}
+
+.news-cat {
+	font-size: 0.9em;
+	font: 400 14px/20px TitleFont;
+}
+
+.news-cat a {
+	text-decoration: none;
+	color:var(--color);
+	transition: opacity .3s ease;
+	margin-right:5px;
+}
+
+.news-cat a:hover {
+	opacity: 60%;
+	color: gray;
+	text-decoration: underline;
+}
+
+.news-fragment {
+	max-width:90%;
+	margin: 0 auto;
 }
 
 .news-fragment p {
 	font-size: .9em;
 	line-height: 1.6em;
 	font-weight: inherit;
-	margin: 1.6rem 0 0;
-	
+	margin: 0.3rem 0 0;
+	font-family: NewsFont;
 }
-.font-default{
+
+.news-fragment span>a {
+	color:var(--color);
+	text-decoration: underline;
+	transition: opacity .3s ease;
+	font: 700 12px/14px NewsFont;
+	letter-spacing: .2em;
+}
+
+.news-fragment span>a:hover {
+	opacity: 60%;
+	color: gray;
+}
+
+.h3 {
 	font-family: TitleFont;
+	font-size: 1.2em;
+	font-weight: bold;
 }
