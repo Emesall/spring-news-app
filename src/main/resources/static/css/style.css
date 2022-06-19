@@ -1,11 +1,16 @@
 @font-face {
 	font-family: TitleFont;
-	src: url('KdamThmorPro-Regular.ttf');
+	src: url('../fonts/KdamThmorPro-Regular.ttf');
+}
+
+@font-face {
+	font-family: DateFont;
+	src: url('../fonts/shadows.ttf');
 }
 
 @font-face {
 	font-family: NewsFont;
-	src: url('shadows.ttf');
+	src: url('../fonts/KdamThmorPro-Regular.ttf');
 }
 
 :root {
@@ -31,12 +36,19 @@
 	text-align: center;
 	overflow: hidden;
 	margin: 0 auto;
+	font-family:DateFont;
 }
+.news-header time{
+	font-weight: bold;
+}
+
 
 .news-title {
 	text-transform: uppercase;
 	margin: 0 0 10px;
 	letter-spacing: -.02em;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 
 .news-title a {
@@ -45,14 +57,14 @@
 	transition: opacity .3s ease;
 }
 
+
 .news-title a:hover {
 	opacity: 90%;
 	color: gray;
 }
 
 .news-cat {
-	font-size: 0.9em;
-	font: 400 14px/20px TitleFont;
+	font-size: 1em;
 }
 
 .news-cat a {
@@ -78,14 +90,14 @@
 	line-height: 1.6em;
 	font-weight: inherit;
 	margin: 0.3rem 0 0;
-	font-family: NewsFont;
+	font-family: 400 12px/14px NewsFont;
 }
 
 .news-fragment span>a {
 	color:var(--color);
 	text-decoration: underline;
 	transition: opacity .3s ease;
-	font: 700 12px/14px NewsFont;
+	font: 700 12px/14px DateFont;
 	letter-spacing: .2em;
 }
 
@@ -94,8 +106,3 @@
 	color: gray;
 }
 
-.h3 {
-	font-family: TitleFont;
-	font-size: 1.2em;
-	font-weight: bold;
-}
