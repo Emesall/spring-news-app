@@ -10,7 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
 	// login page and index page controller
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/login");
 	}
 
