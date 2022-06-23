@@ -29,7 +29,7 @@ public class Category extends BaseEntity {
 	private Set<User> users = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-	private Set<Page> pages = new HashSet<>();
+	private Set<WebSite> pages = new HashSet<>();
 
 
 }

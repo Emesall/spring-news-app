@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
-import com.emesall.news.model.Page;
+import com.emesall.news.model.WebSite;
 import com.emesall.news.model.User;
 import com.emesall.news.repository.CategoryRepository;
 import com.emesall.news.repository.FeedRepository;
@@ -47,14 +47,14 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		userRepository.save(user1);
 		
 		addCategories();
-		addPages();
-		createRandomFeed(8);
+		//addWebsites();
+		createRandomFeed(3);
 
 	}
 
-	private void addPages() {
+	private void addWebsites() {
 		try {
-			Page page = new Page();
+			WebSite page = new WebSite();
 			URI url = new URI("https://www.skysports.com/rss/12040");
 			page.setUrl(url);
 			page.setCategory(categoryRepository.findByName("Sport").get());

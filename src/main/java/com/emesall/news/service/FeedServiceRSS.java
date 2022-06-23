@@ -24,4 +24,10 @@ public class FeedServiceRSS implements FeedService {
 		return feedRepository.findAll(pageable);
 	}
 
+	@Override
+	public Feed save(Feed feed) {
+
+		return feedRepository.save(feed);
+	}
+
 }

@@ -70,6 +70,11 @@
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.rometools</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.10.0</version>
+		</dependency>
 		
 		<!-- webjars -->
 		<dependency>

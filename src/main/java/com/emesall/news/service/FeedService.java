@@ -8,4 +8,5 @@ import com.emesall.news.model.Feed;
 public interface FeedService {
 
 	Page<Feed> fetchAll(Pageable pageable);
+	Feed save(Feed feed);
 }

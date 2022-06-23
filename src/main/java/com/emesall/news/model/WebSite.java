@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class Page extends BaseEntity {
+public class WebSite extends BaseEntity {
 
 	private static final long serialVersionUID = -3011921260852414106L;
 
