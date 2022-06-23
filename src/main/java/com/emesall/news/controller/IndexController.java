@@ -15,7 +15,7 @@ import com.emesall.news.service.FeedService;
 public class IndexController {
 
 	private final FeedService feedService;
-	private int pageSize = 5;
+	private int pageSize = 8;
 
 	@Autowired
 	public IndexController(FeedService feedService) {

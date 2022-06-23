@@ -42,12 +42,12 @@
 	</div>
 	<div class="col-12 text-center" style="margin-top: 40px">
 
-		<a th:if="${currentPage > 1}" th:href="/">Previous</a> <span
+		<a th:if="${currentPage > 1}" >Previous</a> <span
 			th:unless="${currentPage > 1}">Previous</span> <span
 			th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
-			th:if="${currentPage != i}" th:href="/">[[${i}]]</a> <span
+			th:if="${currentPage != i}" >[[${i}]]</a> <span
 			th:unless="${currentPage != i}">[[${i}]]</span>
-		</span> <a th:if="${currentPage < totalPages}" th:href="/">Next</a> <span
+		</span> <a th:if="${currentPage < totalPages}" >Next</a> <span
 			th:unless="${currentPage < totalPages}">Next</span>
 
 

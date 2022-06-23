@@ -37,7 +37,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		User user1 = User.builder().enabled(true).email("user1@mail.com").password(encoder.encode("user1")).build();
 		userRepository.save(user1);
-		createRandomFeed(3);
+		createRandomFeed(8);
 
 	}
 
