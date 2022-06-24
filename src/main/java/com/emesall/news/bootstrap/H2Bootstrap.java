@@ -1,6 +1,6 @@
 package com.emesall.news.bootstrap;
 
-import java.net.URI;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 
 import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
-import com.emesall.news.model.WebSite;
 import com.emesall.news.model.User;
+import com.emesall.news.model.WebSite;
 import com.emesall.news.repository.CategoryRepository;
 import com.emesall.news.repository.FeedRepository;
-import com.emesall.news.repository.PageRepository;
+import com.emesall.news.repository.WebSiteRepository;
 import com.emesall.news.repository.UserRepository;
 
 @Component
@@ -29,11 +29,11 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private final CategoryRepository categoryRepository;
 	private final FeedRepository feedRepository;
 	private final PasswordEncoder encoder;
-	private final PageRepository pageRepository;
+	private final WebSiteRepository pageRepository;
 
 	@Autowired
 	public H2Bootstrap(UserRepository userRepository, CategoryRepository categoryRepository,
-			FeedRepository feedRepository, PasswordEncoder encoder, PageRepository pageRepository) {
+			FeedRepository feedRepository, PasswordEncoder encoder, WebSiteRepository pageRepository) {
 		this.userRepository = userRepository;
 		this.categoryRepository = categoryRepository;
 		this.feedRepository = feedRepository;
@@ -55,7 +55,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private void addWebsites() {
 		try {
 			WebSite page = new WebSite();
-			URI url = new URI("https://www.skysports.com/rss/12040");
+			URL url = new URL("https://www.skysports.com/rss/12040");
 			page.setUrl(url);
 			page.setCategory(categoryRepository.findByName("Sport").get());
 			pageRepository.save(page);
@@ -82,7 +82,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 			cal.set(2022, 4, i + 1);
 
 			try {
-				URI uri = new URI("/");
+				URL url = new URL("/");
 				Feed feed = Feed.builder()
 						.author("Author" + i)
 						.date_time(cal.getTime())
@@ -93,7 +93,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 								+ "							hundreds. England beat their own record of 481 for 6 which they\r\n"
 								+ "							scored against Australia in 2018 at Nottingham.  " + i)
 						.title("England won over Netherland " + i)
-						.url(uri)
+						.url(url)
 						.build();
 				List<Category> categories = categoryRepository.findAll();
 				feed.getCategories().addAll(categories);

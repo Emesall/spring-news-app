@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emesall.news.model.WebSite;
 
-public interface PageRepository extends JpaRepository<WebSite, Long> {
+public interface WebSiteRepository extends JpaRepository<WebSite, Long> {
 
 }

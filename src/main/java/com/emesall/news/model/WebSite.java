@@ -1,6 +1,6 @@
 package com.emesall.news.model;
 
-import java.net.URI;
+import java.net.URL;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -17,7 +17,7 @@ public class WebSite extends BaseEntity {
 
 	private static final long serialVersionUID = -3011921260852414106L;
 
-	private URI url;
+	private URL url;
 	@ManyToOne
 	private Category category;
 	

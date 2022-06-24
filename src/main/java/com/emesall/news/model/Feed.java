@@ -1,6 +1,6 @@
 package com.emesall.news.model;
 
-import java.net.URI;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class Feed extends BaseEntity {
 	private String title;
 	@Lob
 	private String entry;
-	private URI url;
+	private URL url;
 	
 	@ManyToMany
 	@JoinTable(name = "feed_category", joinColumns = @JoinColumn(name = "feed_id"), inverseJoinColumns=@JoinColumn(name = "category_id"))
