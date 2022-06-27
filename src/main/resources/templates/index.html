@@ -44,10 +44,10 @@
 	
 
 	<div class="pagination" >
-		<a href="#">&laquo;</a> <a
+		<a th:href="@{'?page='+${currentPage - 1}}" th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a> <a
 			th:each="i: ${#numbers.sequence(1, totalPages)}" th:href="@{'?page='+${i}}"
-			th:text="${i}" th:class="${currentPage==i ? 'active' : ''}">1</a> <a
-			href="#">&raquo;</a>
+			th:text="${i}" th:class="${currentPage==i ? 'active' : ''}">1</a> 
+		<a th:href="@{'?page='+${currentPage + 1}}" th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
 	</div>
 
 

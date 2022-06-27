@@ -132,4 +132,9 @@
 	color: gray;
 	text-decoration: underline;
 }
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
 
