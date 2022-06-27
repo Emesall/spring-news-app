@@ -1,11 +1,12 @@
 package com.emesall.news.service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,27 +44,24 @@ public class FeedServiceRSS implements FeedService {
 		return feedRepository.save(feed);
 	}
 
+
 	@Override
-	public Feed findNewest() {
-		return feedRepository.findAllOrderByDateTime().get(0);
-	}
-	
-	@Override
-	public List<Feed> readNewFeeds(WebSite webSite) throws IOException, FeedException, MalformedURLException {
+	public List<Feed> readNewFeeds(WebSite webSite) throws IOException, FeedException, URISyntaxException {
 		SyndFeedInput input = new SyndFeedInput();
 		SyndFeed feed = input.build(new XmlReader(webSite.getUrl()));
 		ArrayList<Feed> feeds = new ArrayList<>();
 		for (Object o : feed.getEntries()) {
 			SyndEntry entry = (SyndEntry) o;
-			if (checkIfNew(entry.getPublishedDate())) {
+			if (isFeedNew(webSite, entry.getPublishedDate())) {
 				Feed parsedFeed = new Feed();
 
 				parsedFeed.setTitle(entry.getTitle());
 				parsedFeed.setAuthor(entry.getAuthor());
-				parsedFeed.setDate_time(entry.getPublishedDate());
-				parsedFeed.setUrl(new URL(entry.getLink()));
+				parsedFeed.setDateTime(entry.getPublishedDate());
+				parsedFeed.setUri(new URI(entry.getLink()));
 				parsedFeed.setEntry(entry.getDescription().getValue());
 				parsedFeed.getCategories().add(webSite.getCategory());
+				parsedFeed.setWebSite(webSite);
 				feeds.add(parsedFeed);
 			}
 
@@ -72,15 +70,20 @@ public class FeedServiceRSS implements FeedService {
 		return feeds;
 	}
 
-	private boolean checkIfNew(Date date) {
-		// find newest in DB
-		Feed f = findNewest();
-		if (date.compareTo(f.getDate_time())>0)
+	// check if fetched entry is new
+	private boolean isFeedNew(WebSite webSite, Date date) {
+
+		Set<Feed> feeds = webSite.getFeeds();
+		// if set is empty, there is no feed at all so webSite must be new
+		if (feeds.isEmpty())
 			return true;
+		// find latest feed (first in Set)
+		Date latestDate = feeds.iterator().next().getDateTime();
+		
+		if (date.compareTo(latestDate) > 0)
+			return true; // feed is newer than the latest in DB
 
-		return false;
+		return false; // feed is already in DB
 	}
-
-	
 
 }

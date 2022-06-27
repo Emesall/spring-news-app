@@ -21,7 +21,7 @@
 						</h3>
 						<hr />
 						<time
-							th:text="${#calendars.format(feed.date_time,'E, dd-MM-yyyy   HH:mm')}">Thursday,
+							th:text="${#calendars.format(feed.dateTime,'E, dd-MM-yyyy   HH:mm')}">Thursday,
 							June 12, 2022</time>
 						<p class="news-cat">
 							<span th:each="category : ${feed.categories}"><a href=""

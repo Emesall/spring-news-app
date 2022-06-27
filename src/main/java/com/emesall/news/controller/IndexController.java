@@ -34,6 +34,7 @@ public class IndexController {
 		model.addAttribute("totalPages", results.getTotalPages());
 		model.addAttribute("totalResults", results.getTotalElements());
 		model.addAttribute("results", results.getContent());
+		
 		return "index";
 	}
 

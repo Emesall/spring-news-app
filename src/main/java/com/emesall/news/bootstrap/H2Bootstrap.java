@@ -1,5 +1,8 @@
 package com.emesall.news.bootstrap;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.List;
@@ -18,8 +21,8 @@ import com.emesall.news.model.User;
 import com.emesall.news.model.WebSite;
 import com.emesall.news.repository.CategoryRepository;
 import com.emesall.news.repository.FeedRepository;
-import com.emesall.news.repository.WebSiteRepository;
 import com.emesall.news.repository.UserRepository;
+import com.emesall.news.repository.WebSiteRepository;
 
 @Component
 @Transactional
@@ -29,39 +32,40 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private final CategoryRepository categoryRepository;
 	private final FeedRepository feedRepository;
 	private final PasswordEncoder encoder;
-	private final WebSiteRepository pageRepository;
+	private final WebSiteRepository webSiteRepository;
 
 	@Autowired
 	public H2Bootstrap(UserRepository userRepository, CategoryRepository categoryRepository,
-			FeedRepository feedRepository, PasswordEncoder encoder, WebSiteRepository pageRepository) {
+			FeedRepository feedRepository, PasswordEncoder encoder, WebSiteRepository webSiteRepository) {
 		this.userRepository = userRepository;
 		this.categoryRepository = categoryRepository;
 		this.feedRepository = feedRepository;
 		this.encoder = encoder;
-		this.pageRepository = pageRepository;
+		this.webSiteRepository = webSiteRepository;
 	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		User user1 = User.builder().enabled(true).email("user1@mail.com").password(encoder.encode("user1")).build();
 		userRepository.save(user1);
-		
+
 		addCategories();
-		//addWebsites();
-		createRandomFeed(3);
-
-	}
-
-	private void addWebsites() {
 		try {
-			WebSite page = new WebSite();
-			URL url = new URL("https://www.skysports.com/rss/12040");
-			page.setUrl(url);
-			page.setCategory(categoryRepository.findByName("Sport").get());
-			pageRepository.save(page);
+			addWebsites();
+			createRandomFeed(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	private void addWebsites() throws MalformedURLException {
+
+		WebSite page = new WebSite();
+		URL url = new URL("https://www.skysports.com/rss/12040");
+		page.setUrl(url);
+		page.setCategory(categoryRepository.findByName("Sport").get());
+		webSiteRepository.save(page);
 	}
 
 	private void addCategories() {
@@ -76,32 +80,29 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		categoryRepository.save(cat3);
 	}
 
-	private void createRandomFeed(int num) {
+	private void createRandomFeed(int num) throws URISyntaxException {
 		for (int i = 0; i < num; i++) {
 			Calendar cal = Calendar.getInstance();
 			cal.set(2022, 4, i + 1);
 
-			try {
-				URL url = new URL("/");
-				Feed feed = Feed.builder()
-						.author("Author" + i)
-						.date_time(cal.getTime())
-						.entry("England shattered their own world record for the highest\r\n"
-								+ "							total in ODI cricket in the first one-dayer against Netherlands\r\n"
-								+ "							at Amstelveen on Friday (June 17). England batsman ran amok and\r\n"
-								+ "							scored 498 for 4 in 50 overs with three batsmen reaching\r\n"
-								+ "							hundreds. England beat their own record of 481 for 6 which they\r\n"
-								+ "							scored against Australia in 2018 at Nottingham.  " + i)
-						.title("England won over Netherland " + i)
-						.url(url)
-						.build();
-				List<Category> categories = categoryRepository.findAll();
-				feed.getCategories().addAll(categories);
+			URI url = new URI("/");
+			Feed feed = Feed.builder()
+					.author("Author" + i)
+					.dateTime(cal.getTime())
+					.entry("England shattered their own world record for the highest\r\n"
+							+ "							total in ODI cricket in the first one-dayer against Netherlands\r\n"
+							+ "							at Amstelveen on Friday (June 17). England batsman ran amok and\r\n"
+							+ "							scored 498 for 4 in 50 overs with three batsmen reaching\r\n"
+							+ "							hundreds. England beat their own record of 481 for 6 which they\r\n"
+							+ "							scored against Australia in 2018 at Nottingham.  " + i)
+					.title("England won over Netherland " + i)
+					.uri(url)
+					.build();
+			List<Category> categories = categoryRepository.findAll();
+			feed.getCategories().addAll(categories);
 
-				feedRepository.save(feed);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			feedRepository.save(feed);
+
 		}
 	}
 

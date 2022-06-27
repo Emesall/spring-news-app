@@ -1,6 +1,6 @@
 package com.emesall.news.model;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,11 +27,14 @@ public class Feed extends BaseEntity {
 	private static final long serialVersionUID = 3667506579600874791L;
 
 	private String author;
-	private Date date_time;
+	private Date dateTime;
 	private String title;
 	@Lob
 	private String entry;
-	private URL url;
+	@Lob
+	private URI uri;
+	@ManyToOne
+	private WebSite webSite;
 	
 	@ManyToMany
 	@JoinTable(name = "feed_category", joinColumns = @JoinColumn(name = "feed_id"), inverseJoinColumns=@JoinColumn(name = "category_id"))
