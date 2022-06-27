@@ -50,7 +50,7 @@
 	margin: 0 0 10px;
 	letter-spacing: -.02em;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 0.9em;
 	font-family:NewsFont;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .news-cat {
-	font-size: 1em;
+	font-size: 0.9em;
 }
 
 .news-cat a {
@@ -107,5 +107,29 @@
 .news-fragment span>a:hover {
 	opacity: 60%;
 	color: gray;
+}
+.pagination {
+	display: inline-block;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.pagination a {
+	color: black;
+	padding: 8px 16px;
+	text-decoration: none;
+	font-family: 400 12px/14px NewsFont;
+}
+
+.pagination a.active {
+	
+	border-radius: 5px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.pagination a:hover:not(.active) {
+	color: gray;
+	text-decoration: underline;
 }
 

@@ -66,6 +66,12 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		page.setUrl(url);
 		page.setCategory(categoryRepository.findByName("Sport").get());
 		webSiteRepository.save(page);
+
+		WebSite page2 = new WebSite();
+		URL url2 = new URL("http://feeds.bbci.co.uk/news/world/rss.xml");
+		page2.setUrl(url2);
+		page2.setCategory(categoryRepository.findByName("News").get());
+		webSiteRepository.save(page2);
 	}
 
 	private void addCategories() {
@@ -89,18 +95,13 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 			Feed feed = Feed.builder()
 					.author("Author" + i)
 					.dateTime(cal.getTime())
-					.entry("England shattered their own world record for the highest\r\n"
-							+ "							total in ODI cricket in the first one-dayer against Netherlands\r\n"
-							+ "							at Amstelveen on Friday (June 17). England batsman ran amok and\r\n"
-							+ "							scored 498 for 4 in 50 overs with three batsmen reaching\r\n"
-							+ "							hundreds. England beat their own record of 481 for 6 which they\r\n"
-							+ "							scored against Australia in 2018 at Nottingham.  " + i)
+					.entry("England shattered their own world record for the highest total in ODI cricket in the first one-dayer against Netherlands at Amstelveen on Friday (June 17). England batsman ran amok and scored 498 for 4 in 50 overs with three batsmen reaching hundreds. England beat their own record of 481 for 6 which they scored against Australia in 2018 at Nottingham.  "
+							+ i)
 					.title("England won over Netherland " + i)
 					.uri(url)
 					.build();
 			List<Category> categories = categoryRepository.findAll();
 			feed.getCategories().addAll(categories);
-
 			feedRepository.save(feed);
 
 		}

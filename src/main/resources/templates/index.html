@@ -17,7 +17,8 @@
 				<article class="news">
 					<header class="news-header">
 						<h3 class="news-title">
-							<a href="" th:text="${feed.title}">Title</a>
+							<a th:href="${feed.uri}" th:target="_blank"
+								th:text="${feed.title}">Title</a>
 						</h3>
 						<hr />
 						<time
@@ -29,28 +30,26 @@
 						</p>
 						<hr />
 					</header>
-					<section class="news-fragment" >
-						<p th:text="${feed.entry}">England shattered their own world record for the highest
-							total in ODI cricket in the first one-dayer against Netherlands
-						</p>
-						<span><a href="">more</a></span>
+					<section class="news-fragment">
+						<p th:text="${feed.entry}">England shattered their own world
+							record for the highest total in ODI cricket in the first
+							one-dayer against Netherlands</p>
+						<span><a th:href="${feed.uri}" th:target="_blank">more</a></span>
 					</section>
 				</article>
 			</div>
 		</div>
 
 	</div>
-	<div class="col-12 text-center" style="margin-top: 40px">
+	
 
-		<a th:if="${currentPage > 1}" >Previous</a> <span
-			th:unless="${currentPage > 1}">Previous</span> <span
-			th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
-			th:if="${currentPage != i}" >[[${i}]]</a> <span
-			th:unless="${currentPage != i}">[[${i}]]</span>
-		</span> <a th:if="${currentPage < totalPages}" >Next</a> <span
-			th:unless="${currentPage < totalPages}">Next</span>
-
-
+	<div class="pagination" >
+		<a href="#">&laquo;</a> <a
+			th:each="i: ${#numbers.sequence(1, totalPages)}" th:href="@{'?page='+${i}}"
+			th:text="${i}" th:class="${currentPage==i ? 'active' : ''}">1</a> <a
+			href="#">&raquo;</a>
 	</div>
+
+
 </body>
 </html>
