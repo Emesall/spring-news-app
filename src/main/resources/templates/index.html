@@ -41,13 +41,31 @@
 		</div>
 
 	</div>
-	
 
-	<div class="pagination" >
-		<a th:href="@{'?page='+${currentPage - 1}}" th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a> <a
-			th:each="i: ${#numbers.sequence(1, totalPages)}" th:href="@{'?page='+${i}}"
-			th:text="${i}" th:class="${currentPage==i ? 'active' : ''}">1</a> 
-		<a th:href="@{'?page='+${currentPage + 1}}" th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
+
+	<div class="pagination">
+		<a th:href="@{'?page='+${currentPage - 1}}"
+			th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a>
+		<div th:if="${totalPages<=6}">
+			<a th:each="i: ${#numbers.sequence(1, totalPages)}"
+				th:href="@{'?page='+${i}}" th:text="${i}"
+				th:class="${currentPage==i ? 'active' : ''}"></a>
+		</div>
+		<div th:if="${totalPages>6}">
+			<a th:href="@{'?page=1'}" th:text="1"
+				th:class="${currentPage==1 ? 'active' : ''}"></a> 
+			<a th:if="${currentPage>3}"><span>...</span></a>
+			<a th:if="${currentPage==totalPages}"  th:href="@{'?page='+${currentPage-2}}" ><span th:text="${currentPage-2}"></span></a> 
+			<a th:if="${currentPage>2}" th:href="@{'?page='+${currentPage-1}}"><span th:text="${currentPage-1}"> </span></a> 
+			<a th:if="${currentPage!=1 and currentPage!=totalPages}" th:href="@{'?page='+${currentPage}}"  th:class="active" ><span th:text="${currentPage}"> </span></a>
+			<a th:if="${currentPage<totalPages-1}"  th:href="@{'?page='+${currentPage+1}}"><span th:text="${currentPage+1}"></span></a> 
+			<a th:if="${currentPage==1}" th:href="@{'?page='+${currentPage+2}}"><span th:text="${currentPage+2}"></span></a>  
+			<a th:if="${currentPage<totalPages-2}"><span>...</span></a>
+			<a th:if="${totalPages>1}" th:href="@{'?page='+${totalPages}}"
+				th:class="${currentPage==totalPages ? 'active' : ''}"><span th:text="${totalPages}"></span></a> 
+		</div>
+		<a th:href="@{'?page='+${currentPage + 1}}"
+			th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
 	</div>
 
 
