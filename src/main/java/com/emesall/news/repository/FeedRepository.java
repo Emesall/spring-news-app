@@ -7,4 +7,5 @@ import com.emesall.news.model.Feed;
 public interface FeedRepository extends JpaRepository<Feed, Long> {
 
 	
+	
 }

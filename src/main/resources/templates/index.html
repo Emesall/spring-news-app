@@ -25,7 +25,7 @@
 							th:text="${#calendars.format(feed.dateTime,'E, dd-MM-yyyy   HH:mm')}">Thursday,
 							June 12, 2022</time>
 						<p class="news-cat">
-							<span th:each="category : ${feed.categories}"><a href=""
+							<span th:each="category : ${feed.categories}"><a th:href="@{'?tag='+${category.name}}"
 								th:text="${category.name}">Sport </a></span>
 						</p>
 						<hr />
@@ -43,29 +43,33 @@
 	</div>
 
 
-	<div class="pagination">
-		<a th:href="@{'?page='+${currentPage - 1}}"
+	<div class="pagination" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+		<a th:href="${urlBuilder.replaceQueryParam('page',currentPage-1).toUriString()}"
 			th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a>
 		<div th:if="${totalPages<=6}">
 			<a th:each="i: ${#numbers.sequence(1, totalPages)}"
-				th:href="@{'?page='+${i}}" th:text="${i}"
+				th:href="${urlBuilder.replaceQueryParam('page',i).toUriString()}" th:text="${i}"
 				th:class="${currentPage==i ? 'active' : ''}"></a>
 		</div>
-		<div th:if="${totalPages>6}">
-			<a th:href="@{'?page=1'}" th:text="1"
+		<div 
+			th:if="${totalPages>6}">
+			<a th:href="${urlBuilder.replaceQueryParam('page',1).toUriString()}" th:text="1"
 				th:class="${currentPage==1 ? 'active' : ''}"></a> 
 			<a th:if="${currentPage>3}"><span>...</span></a>
-			<a th:if="${currentPage==totalPages}"  th:href="@{'?page='+${currentPage-2}}" ><span th:text="${currentPage-2}"></span></a> 
-			<a th:if="${currentPage>2}" th:href="@{'?page='+${currentPage-1}}"><span th:text="${currentPage-1}"> </span></a> 
-			<a th:if="${currentPage!=1 and currentPage!=totalPages}" th:href="@{'?page='+${currentPage}}"  th:class="active" ><span th:text="${currentPage}"> </span></a>
-			<a th:if="${currentPage<totalPages-1}"  th:href="@{'?page='+${currentPage+1}}"><span th:text="${currentPage+1}"></span></a> 
-			<a th:if="${currentPage==1}" th:href="@{'?page='+${currentPage+2}}"><span th:text="${currentPage+2}"></span></a>  
+			<a th:if="${currentPage==totalPages}"  th:href="${urlBuilder.replaceQueryParam('page',currentPage - 2).toUriString()}" ><span th:text="${currentPage-2}"></span></a> 
+			<a th:if="${currentPage>2}"  th:href="${urlBuilder.replaceQueryParam('page',currentPage - 1).toUriString()}"><span th:text="${currentPage-1}"> </span></a> 
+			<a th:if="${currentPage!=1 and currentPage!=totalPages}" th:href="${urlBuilder.replaceQueryParam('page',currentPage).toUriString()}"  th:class="active" ><span th:text="${currentPage}"> </span></a>
+			<a th:if="${currentPage<totalPages-1}" th:href="${urlBuilder.replaceQueryParam('page',currentPage + 1).toUriString()}"><span th:text="${currentPage+1}"></span></a> 
+			<a th:if="${currentPage==1}" th:href="${urlBuilder.replaceQueryParam('page',currentPage + 2).toUriString()}"><span th:text="${currentPage+2}"></span></a>  
 			<a th:if="${currentPage<totalPages-2}"><span>...</span></a>
-			<a th:if="${totalPages>1}" th:href="@{'?page='+${totalPages}}"
+			<a th:if="${totalPages>1}" th:href="${urlBuilder.replaceQueryParam('page',totalPages).toUriString()}"
 				th:class="${currentPage==totalPages ? 'active' : ''}"><span th:text="${totalPages}"></span></a> 
+			
 		</div>
-		<a th:href="@{'?page='+${currentPage + 1}}"
-			th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
+		<a th:href="${urlBuilder.replaceQueryParam('page',currentPage + 1).toUriString()}"
+				th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
+		
+		
 	</div>
 
 

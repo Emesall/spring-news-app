@@ -10,9 +10,11 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
 import com.emesall.news.model.WebSite;
 import com.emesall.news.repository.FeedRepository;
@@ -43,7 +45,6 @@ public class FeedServiceRSS implements FeedService {
 
 		return feedRepository.save(feed);
 	}
-
 
 	@Override
 	public List<Feed> readNewFeeds(WebSite webSite) throws IOException, FeedException, URISyntaxException {
@@ -79,11 +80,21 @@ public class FeedServiceRSS implements FeedService {
 			return true;
 		// find latest feed (first in Set)
 		Date latestDate = feeds.iterator().next().getDateTime();
-		
+
 		if (date.compareTo(latestDate) > 0)
 			return true; // feed is newer than the latest in DB
 
 		return false; // feed is already in DB
+	}
+
+	@Override
+	public Page<Feed> fetchByCategory(Category category, Pageable pageable) {
+		List<Feed> feeds = category.getFeeds().stream().toList();
+		int start = (int) pageable.getOffset();
+		int end = Math.min((start + pageable.getPageSize()), feeds.size());
+		Page<Feed> page = new PageImpl<Feed>(feeds.subList(start, end), pageable, feeds.size());
+
+		return page;
 	}
 
 }

@@ -116,7 +116,7 @@
 
 .pagination a {
 	color: black;
-	padding: 8px 16px;
+	padding-right: 10px;
 	text-decoration: none;
 	font-family: 400 12px/14px NewsFont;
 }
