@@ -1,7 +1,7 @@
 package com.emesall.news.model;
 
 import java.net.URI;
-import java.util.Date;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +27,7 @@ public class Feed extends BaseEntity {
 	private static final long serialVersionUID = 3667506579600874791L;
 
 	private String author;
-	private Date dateTime;
+	private Instant instant;
 	private String title;
 	@Lob
 	private String entry;

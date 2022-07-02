@@ -2,7 +2,10 @@ package com.emesall.news.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,5 +27,8 @@ public interface FeedService {
 
 	// find all new RSS feeds in given page
 	List<Feed> readNewFeeds(WebSite webSite) throws IOException, FeedException, URISyntaxException;
+	
+	//calculate how long ago the feed was added
+	String timeAgo(Instant date, Locale locale, ZoneId zone);
 
 }

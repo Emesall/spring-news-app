@@ -8,7 +8,7 @@ public class DateComparator implements Comparator<Feed> {
 	
 	@Override
 	public int compare(Feed o1, Feed o2) {
-		return o2.getDateTime().compareTo(o1.getDateTime());
+		return o2.getInstant().compareTo(o1.getInstant());
 	}
 
 }

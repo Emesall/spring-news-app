@@ -3,9 +3,13 @@ package com.emesall.news.service;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,8 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
+
+import net.time4j.PrettyTime;
 
 @Service
 public class FeedServiceRSS implements FeedService {
@@ -53,12 +59,13 @@ public class FeedServiceRSS implements FeedService {
 		ArrayList<Feed> feeds = new ArrayList<>();
 		for (Object o : feed.getEntries()) {
 			SyndEntry entry = (SyndEntry) o;
-			if (isFeedNew(webSite, entry.getPublishedDate())) {
+			Instant date = entry.getPublishedDate().toInstant();
+			if (isFeedNew(webSite, date)) {
 				Feed parsedFeed = new Feed();
 
 				parsedFeed.setTitle(entry.getTitle());
 				parsedFeed.setAuthor(entry.getAuthor());
-				parsedFeed.setDateTime(entry.getPublishedDate());
+				parsedFeed.setInstant(date);
 				parsedFeed.setUri(new URI(entry.getLink()));
 				parsedFeed.setEntry(entry.getDescription().getValue());
 				parsedFeed.getCategories().add(webSite.getCategory());
@@ -72,14 +79,14 @@ public class FeedServiceRSS implements FeedService {
 	}
 
 	// check if fetched entry is new
-	private boolean isFeedNew(WebSite webSite, Date date) {
+	private boolean isFeedNew(WebSite webSite, Instant date) {
 
 		Set<Feed> feeds = webSite.getFeeds();
 		// if set is empty, there is no feed at all so webSite must be new
 		if (feeds.isEmpty())
 			return true;
 		// find latest feed (first in Set)
-		Date latestDate = feeds.iterator().next().getDateTime();
+		Instant latestDate = feeds.iterator().next().getInstant();
 
 		if (date.compareTo(latestDate) > 0)
 			return true; // feed is newer than the latest in DB
@@ -95,6 +102,12 @@ public class FeedServiceRSS implements FeedService {
 		Page<Feed> page = new PageImpl<Feed>(feeds.subList(start, end), pageable, feeds.size());
 
 		return page;
+	}
+
+	@Override
+	public String timeAgo(Instant date, Locale locale, ZoneId zone) {
+		return PrettyTime.of(locale).printRelative(date, zone);
+
 	}
 
 }

@@ -4,7 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Calendar;
+import java.time.Instant;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -72,6 +72,12 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		page2.setUrl(url2);
 		page2.setCategory(categoryRepository.findByName("News").get());
 		webSiteRepository.save(page2);
+		
+			
+		WebSite page3 = new WebSite();
+		URL url3 = new URL("https://www.mykhel.com/rss/sports-%20wwe-fb.xml");
+		page3.setUrl(url3);
+		webSiteRepository.save(page3);
 	}
 
 	private void addCategories() {
@@ -88,13 +94,11 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	private void createRandomFeed(int num) throws URISyntaxException {
 		for (int i = 0; i < num; i++) {
-			Calendar cal = Calendar.getInstance();
-			cal.set(2022, 4, i + 1);
 
 			URI url = new URI("/");
 			Feed feed = Feed.builder()
 					.author("Author" + i)
-					.dateTime(cal.getTime())
+					.instant(Instant.now())
 					.entry("England shattered their own world record for the highest total in ODI cricket in the first one-dayer against Netherlands at Amstelveen on Friday (June 17). England batsman ran amok and scored 498 for 4 in 50 overs with three batsmen reaching hundreds. England beat their own record of 481 for 6 which they scored against Australia in 2018 at Nottingham.  "
 							+ i)
 					.title("England won over Netherland " + i)
