@@ -1,13 +1,10 @@
 package com.emesall.news.service;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -18,6 +15,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.emesall.news.dto.FeedDTO;
+import com.emesall.news.mapper.EntryToFeedMapper;
+import com.emesall.news.mapper.FeedMapper;
 import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
 import com.emesall.news.model.WebSite;
@@ -34,16 +34,20 @@ import net.time4j.PrettyTime;
 public class FeedServiceRSS implements FeedService {
 
 	private final FeedRepository feedRepository;
+	private final EntryToFeedMapper entryToFeed;
+	private final FeedMapper feedMapper;
 
 	@Autowired
-	public FeedServiceRSS(FeedRepository feedRepository) {
+	public FeedServiceRSS(FeedRepository feedRepository, EntryToFeedMapper entryToFeed, FeedMapper feedMapper) {
 		super();
 		this.feedRepository = feedRepository;
+		this.entryToFeed = entryToFeed;
+		this.feedMapper = feedMapper;
 	}
 
 	@Override
-	public Page<Feed> fetchAll(Pageable pageable) {
-		return feedRepository.findAll(pageable);
+	public Page<FeedDTO> fetchAll(Pageable pageable) {
+		return feedRepository.findAll(pageable).map(f -> feedMapper.feedToDto(f));
 	}
 
 	@Override
@@ -59,15 +63,8 @@ public class FeedServiceRSS implements FeedService {
 		ArrayList<Feed> feeds = new ArrayList<>();
 		for (Object o : feed.getEntries()) {
 			SyndEntry entry = (SyndEntry) o;
-			Instant date = entry.getPublishedDate().toInstant();
-			if (isFeedNew(webSite, date)) {
-				Feed parsedFeed = new Feed();
-
-				parsedFeed.setTitle(entry.getTitle());
-				parsedFeed.setAuthor(entry.getAuthor());
-				parsedFeed.setInstant(date);
-				parsedFeed.setUri(new URI(entry.getLink()));
-				parsedFeed.setEntry(entry.getDescription().getValue());
+			if (isFeedNew(webSite, entry.getPublishedDate().toInstant())) {
+				Feed parsedFeed = entryToFeed.entryToFeed(entry);
 				parsedFeed.getCategories().add(webSite.getCategory());
 				parsedFeed.setWebSite(webSite);
 				feeds.add(parsedFeed);
@@ -95,18 +92,19 @@ public class FeedServiceRSS implements FeedService {
 	}
 
 	@Override
-	public Page<Feed> fetchByCategory(Category category, Pageable pageable) {
-		List<Feed> feeds = category.getFeeds().stream().toList();
+	public Page<FeedDTO> fetchByCategory(Category category, Pageable pageable) {
+		List<FeedDTO> feeds = category.getFeeds().stream().map(f -> feedMapper.feedToDto(f)).toList();
 		int start = (int) pageable.getOffset();
 		int end = Math.min((start + pageable.getPageSize()), feeds.size());
-		Page<Feed> page = new PageImpl<Feed>(feeds.subList(start, end), pageable, feeds.size());
+		Page<FeedDTO> page = new PageImpl<FeedDTO>(feeds.subList(start, end), pageable, feeds.size());
 
 		return page;
 	}
 
 	@Override
-	public String timeAgo(Instant date, Locale locale, ZoneId zone) {
-		return PrettyTime.of(locale).printRelative(date, zone);
+	public void publishedAgo(Page<FeedDTO> feeds, Locale locale, ZoneId zone) {
+		feeds.forEach(f -> f.setPublishedAgo(PrettyTime.of(locale).printRelative(f.getInstant(), zone)));
+		
 
 	}
 

@@ -1,10 +1,8 @@
 package com.emesall.news.controller;
 
-import java.net.http.HttpRequest;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.emesall.news.dto.FeedDTO;
 import com.emesall.news.model.Category;
-import com.emesall.news.model.Feed;
 import com.emesall.news.service.CategoryService;
 import com.emesall.news.service.FeedService;
 
@@ -48,25 +46,22 @@ public class IndexController {
 		if (page == null) {
 			page = 1;
 		}
-		Page<Feed> results;
+		Page<FeedDTO> results;
 		Pageable pageable = PageRequest.of(page - 1, pageSize);
 		// no category given
 		if (cat_name == null) {
-			results = feedService.fetchAll(pageable);
+			results = feedService.fetchAll(pageable);  //feedDTO without publishedAgo time
 		} else {
 			Category category = categoryService.findByName(cat_name);
-			results = feedService.fetchByCategory(category, pageable);
+			results = feedService.fetchByCategory(category, pageable); //feedDTO without publishedAgo time
 		}
-		List<String> timeAgo = new ArrayList<>();
-		for (int i = 0; i < results.getContent().size(); i++) {
-			timeAgo.add(feedService.timeAgo(results.getContent().get(i).getInstant(), request.getLocale(),
-					ZoneId.systemDefault()));
+		//calculate and add publishedAgo time to every feed
+		feedService.publishedAgo(results, request.getLocale(), ZoneId.systemDefault());
 
-		}
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", results.getTotalPages());
 		model.addAttribute("results", results.getContent());
-		model.addAttribute("timeAgo", timeAgo);
+
 
 		return "index";
 	}
