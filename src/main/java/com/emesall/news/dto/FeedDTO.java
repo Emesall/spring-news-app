@@ -20,4 +20,5 @@ public class FeedDTO {
 	private Set<Category> categories=new HashSet<>();
 	private String publishedAgo;
 	private Instant instant;
+	private String imageUrl;
 }

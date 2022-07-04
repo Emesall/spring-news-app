@@ -52,7 +52,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		addCategories();
 		try {
 			addWebsites();
-			createRandomFeed(3);
+			//createRandomFeed(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

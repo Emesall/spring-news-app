@@ -35,6 +35,7 @@ public class Feed extends BaseEntity {
 	private URI uri;
 	@ManyToOne
 	private WebSite webSite;
+	private String imageUrl;
 	
 	@ManyToMany
 	@JoinTable(name = "feed_category", joinColumns = @JoinColumn(name = "feed_id"), inverseJoinColumns=@JoinColumn(name = "category_id"))
