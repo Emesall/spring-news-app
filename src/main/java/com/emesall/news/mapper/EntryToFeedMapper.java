@@ -22,17 +22,24 @@ public class EntryToFeedMapper {
 		feed.setInstant(entry.getPublishedDate().toInstant());
 		feed.setUri(new URI(entry.getLink()));
 		feed.setEntry(entry.getDescription().getValue());
-		//System.out.println(entry.getEnclosures().get(0).getUrl());
-		List<SyndEnclosure> enclosures = entry.getEnclosures();
-		if (enclosures != null) {
-			for (SyndEnclosure enclosure : enclosures) {
-				if (enclosure.getType() != null && enclosure.getType().contains("image")) {
-					feed.setImageUrl(enclosure.getUrl());
-					
-				}
-			}
+		String imageUrl = getImageUrl(entry.getEnclosures());
+		if (imageUrl != null) {
+			feed.setImageUrl(imageUrl);
 		}
 
 		return feed;
+	}
+
+	private String getImageUrl(List<SyndEnclosure> enclosures) {
+		if (enclosures != null) {
+			for (SyndEnclosure enclosure : enclosures) {
+				if (enclosure.getType() != null && enclosure.getType().contains("image")) {
+
+					return enclosure.getUrl();
+				}
+			}
+
+		}
+		return null;
 	}
 }
