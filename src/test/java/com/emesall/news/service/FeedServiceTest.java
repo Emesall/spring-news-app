@@ -7,10 +7,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.net.URL;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -29,7 +29,9 @@ import com.emesall.news.mapper.EntryToFeedMapper;
 import com.emesall.news.mapper.FeedMapper;
 import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
+import com.emesall.news.model.WebSite;
 import com.emesall.news.repository.FeedRepository;
+import com.rometools.rome.feed.synd.SyndEntry;
 
 class FeedServiceTest {
 
@@ -99,12 +101,21 @@ class FeedServiceTest {
 	}
 
 	@Test
-	void testReadNewFeeds() {
+	void testReadNewFeeds() throws Exception {
 		// given
 
+		WebSite website = new WebSite();
+		URL url = new URL("https://www.skysports.com/rss/12040");
+		Category category=new Category();
+		category.setName(CAT_NAME);
+		website.setUrl(url);
+		website.setCategory(category);
+		
+		when(entryToFeed.entryToFeed(any(SyndEntry.class))).thenReturn(feed);
 		// when
-
+		List<Feed> feeds = feedService.readNewFeeds(website);
 		// then
+		assertNotNull(feeds);
 	}
 
 	@Test
