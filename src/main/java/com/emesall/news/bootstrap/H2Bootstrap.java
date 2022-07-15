@@ -77,6 +77,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		WebSite page3 = new WebSite();
 		URL url3 = new URL("https://www.mykhel.com/rss/sports-%20wwe-fb.xml");
 		page3.setUrl(url3);
+		page3.setCategory(categoryRepository.findByName("Sport").get());
 		webSiteRepository.save(page3);
 	}
 
