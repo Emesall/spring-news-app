@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+</head>
+<body>
+
+	<h2>Login</h2>
+
+	<div th:if="${param.error}" class="alert alert-danger"
+		th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message</div>
+	<div th:if="${param.logout}" class="alert alert-success text-center">
+		You have been logged out.</div>
+	<div th:if="${param.registered}"
+		class="alert alert-success text-center">Successfully registered.</div>
+	<div th:if="${param.passChanged}"
+		class="alert alert-success text-center">Your password has been
+		successfully changed.</div>
+	<div th:if="${param.expired}" class="alert alert-success text-center">Link
+		expired.</div>
+	<form class="form-horizontal" th:action="@{/login}" method="POST"
+		id="loginForm">
+		<div class="form-group has-feedback">
+
+			<div class="row" style="margin-top: 20px">
+				<label class="col-sm-2 control-label">Username</label>
+				<div class="col-md-3">
+
+					<input class="form-control" type="text" name="username"
+						id="username" />
+
+				</div>
+			</div>
+			<div class="row" style="margin-top: 10px">
+
+				<label class="col-sm-2 control-label">Password</label>
+				<div class="col-md-3 ">
+
+					<input class="form-control" type="password" name="password"
+						id="password" />
+
+				</div>
+			</div>
+
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="checkbox" name="remember-me" /> <label>
+					Remember me</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-default" type="submit" th:text="Login">Login</button>
+			</div>
+			<div class="col-sm-offset-4 col-sm-5">
+				<a th:href="@{/forgotPassword}">Forgot password?</a>
+			</div>
+		</div>
+	</form>
+	<div>
+		New here? Click <a th:href="@{/register/owner}">here</a> to register.
+	</div>
+
+</body>
+
+</html>

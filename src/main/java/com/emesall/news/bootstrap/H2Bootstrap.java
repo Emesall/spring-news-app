@@ -46,17 +46,33 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		User user1 = User.builder().enabled(true).email("user1@mail.com").password(encoder.encode("user1")).build();
-		userRepository.save(user1);
 
+		addUser();
 		addCategories();
 		try {
 			addWebsites();
-			//createRandomFeed(3);
+			// createRandomFeed(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void addUser() {
+		User user1 = User.builder()
+				.enabled(true)
+				.email("user1@mail.com")
+				.password(encoder.encode("user1"))
+				.build();
+		userRepository.save(user1);
+		
+		User user2 = User.builder()
+				.enabled(true)
+				.email("user2@mail.com")
+				.password(encoder.encode("user2"))
+				.build();
+		
+		userRepository.save(user2);
 	}
 
 	private void addWebsites() throws MalformedURLException {
@@ -72,8 +88,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		page2.setUrl(url2);
 		page2.setCategory(categoryRepository.findByName("News").get());
 		webSiteRepository.save(page2);
-		
-			
+
 		WebSite page3 = new WebSite();
 		URL url3 = new URL("https://www.mykhel.com/rss/sports-%20wwe-fb.xml");
 		page3.setUrl(url3);
