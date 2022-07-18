@@ -4,10 +4,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -39,9 +38,8 @@ public class User extends BaseEntity implements UserDetails {
 	
 	private boolean enabled;
 	
-	@ManyToMany
-	@JoinTable(name = "user_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns=@JoinColumn(name = "category_id"))
-	private final Set<Category> categories=new HashSet<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private final Set<UserList> user_lists=new HashSet<>();
 
 	public User() {
         super();

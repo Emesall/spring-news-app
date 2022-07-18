@@ -36,7 +36,10 @@ public class IndexController {
 		super();
 		this.feedService = feedService;
 		this.categoryService = categoryService;
+		
 	}
+	
+	
 
 	@GetMapping("/")
 	public String index(Model model, @RequestParam(required = false, value = "tag") String cat_name,

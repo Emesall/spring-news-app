@@ -5,7 +5,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -18,9 +20,11 @@ import org.springframework.stereotype.Component;
 import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
 import com.emesall.news.model.User;
+import com.emesall.news.model.UserList;
 import com.emesall.news.model.WebSite;
 import com.emesall.news.repository.CategoryRepository;
 import com.emesall.news.repository.FeedRepository;
+import com.emesall.news.repository.UserListRepository;
 import com.emesall.news.repository.UserRepository;
 import com.emesall.news.repository.WebSiteRepository;
 
@@ -33,24 +37,28 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private final FeedRepository feedRepository;
 	private final PasswordEncoder encoder;
 	private final WebSiteRepository webSiteRepository;
+	private final UserListRepository userListRepository;
 
 	@Autowired
 	public H2Bootstrap(UserRepository userRepository, CategoryRepository categoryRepository,
-			FeedRepository feedRepository, PasswordEncoder encoder, WebSiteRepository webSiteRepository) {
+			FeedRepository feedRepository, PasswordEncoder encoder, WebSiteRepository webSiteRepository,UserListRepository userListRepository) {
 		this.userRepository = userRepository;
 		this.categoryRepository = categoryRepository;
 		this.feedRepository = feedRepository;
 		this.encoder = encoder;
 		this.webSiteRepository = webSiteRepository;
+		this.userListRepository=userListRepository;
 	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
-		addUser();
-		addCategories();
+		
 		try {
+			addUser();
+			addCategories();
 			addWebsites();
+			addList();
 			// createRandomFeed(3);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,6 +66,16 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	}
 
+	
+	private void addList() {
+		UserList list=new UserList();
+		list.getWebSites().add(webSiteRepository.findById(1L).get());
+		list.getWebSites().add(webSiteRepository.findById(2L).get());
+		list.setUser(userRepository.findById(1L).get());
+		list.setName("List1TEst");
+		userListRepository.save(list);
+	}
+	
 	private void addUser() {
 		User user1 = User.builder()
 				.enabled(true)

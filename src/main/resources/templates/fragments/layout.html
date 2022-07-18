@@ -53,26 +53,37 @@
 						data-bs-toggle="dropdown" aria-expanded="false"><span
 							th:text="Categories">Categories</span></a>
 						<div class="dropdown-menu" aria-labelledby="categoriesDropdown">
-							<a class="dropdown-item" href="#">Sport</a> <a
-								class="dropdown-item" href="#">World News</a>
+							<a class="dropdown-item" th:href="@{/?tag=Sport}">Sport</a> <a
+								class="dropdown-item" th:href="@{/?tag=News}">News</a>
+						</div></li>
+					<li class="nav-item dropdown" sec:authorize="isAuthenticated()"><a
+						class="nav-link dropdown-toggle" id="listsDropdown"
+						th:title="Lists" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false"><span th:text="Lists">Lists</span></a>
+
+						<div class="dropdown-menu" aria-labelledby="ListsDropdown">
+							<div th:each="list: ${userLists}">
+								<a class="dropdown-item" th:href="@{'/list/'+${list.id}}"
+									th:text="${list.name}"> text</a>
+							</div>
+
+							<a class="dropdown-item" th:href="@{/newList}">+ Add new List</a>
 						</div></li>
 
-					<li class="nav-item"><a class="nav-link" th:href="@{/ds}"
-						th:title="MyPage"> <span th:text="My_page">My page</span></a></li>
-
-
-					<li class="nav-item"><a class="nav-link" th:href="@{/}"
-						th:title="Settings"> <span th:text="Settings">Settings</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/settings}" th:title="Settings"> <span
+							th:text="Settings">Settings</span></a></li>
 
 
 					<li class="nav-item" sec:authorize="isAuthenticated()">
 
-						<form th:action="@{/logout}" method="POST">
+						<form class="nav-link" th:action="@{/logout}" method="POST">
 							<button type="submit" name="Logout" class="btn-link"
 								value="Logout">
 								<span th:text="Logout">Logout</span>
 							</button>
 						</form>
+
 
 					</li>
 					<li class="nav-item" sec:authorize="isAnonymous()"><a
@@ -90,7 +101,6 @@
 
 			<br /> <br />
 		</div>
-
 </body>
 
 </html>

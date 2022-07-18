@@ -47,10 +47,11 @@
 
 	<div class="pagination"
 		th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
-		<a
-			th:href="${urlBuilder.replaceQueryParam('page',currentPage-1).toUriString()}"
+		<div th:if="${totalPages>=2}">
+		<a th:href="${urlBuilder.replaceQueryParam('page',currentPage-1).toUriString()}"
 			th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a>
-		<div th:if="${totalPages<=6}">
+		</div>
+		<div th:if="${totalPages<=6 && totalPages>0}">
 			<a th:each="i: ${#numbers.sequence(1, totalPages)}"
 				th:href="${urlBuilder.replaceQueryParam('page',i).toUriString()}"
 				th:text="${i}" th:class="${currentPage==i ? 'active' : ''}"></a>
@@ -79,9 +80,11 @@
 				th:text="${totalPages}"></span></a>
 
 		</div>
+		<div th:if="${totalPages>=2}">
 		<a
 			th:href="${urlBuilder.replaceQueryParam('page',currentPage + 1).toUriString()}"
 			th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
+		</div>
 
 
 	</div>

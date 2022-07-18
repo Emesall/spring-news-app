@@ -27,8 +27,6 @@ public class Category extends BaseEntity {
 	@ManyToMany(mappedBy = "categories")
 	private Set<Feed> feeds = new HashSet<>();
 
-	@ManyToMany(mappedBy = "categories")
-	private Set<User> users = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private Set<WebSite> webSites = new HashSet<>();

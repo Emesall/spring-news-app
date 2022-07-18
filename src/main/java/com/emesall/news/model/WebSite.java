@@ -1,7 +1,6 @@
 package com.emesall.news.model;
 
 import java.net.URL;
-import java.time.ZoneId;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -33,5 +32,7 @@ public class WebSite extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "webSite")
 	@SortComparator(DateComparator.class)
 	private Set<Feed> feeds = new TreeSet<>();
+	
+
 	
 }

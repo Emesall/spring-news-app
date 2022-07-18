@@ -10,7 +10,7 @@
 }
 
 :root {
---black:#000;
+--black:#212529;
 --white:#fff;
 --gray:#d4d4d4;
 --background:#fff;
@@ -23,7 +23,28 @@
 	font-family:DateFont;
 	letter-spacing: 0.9px;
 	font-weight: bold;
+	color:var(--black);
+	
 }
+
+
+.nav-item form > button {
+	
+	font-family:DateFont;
+	letter-spacing: 0.9px;
+  	text-decoration: inherit;
+  	font-weight: inherit;
+  	color:inherit;
+  	border-width: 0;
+  	background-color: inherit;
+  	font-size: inherit;
+  	display: inherit;
+
+  	
+}
+
+
+
 .news {
 	position: relative;
 	word-break: break-word;
@@ -137,5 +158,8 @@
   pointer-events: none;
   cursor: default;
   opacity: 0.6;
+}
+.card{
+	margin: 4rem auto 0;
 }
 
