@@ -43,6 +43,12 @@
   	
 }
 
+.nav-item form > button:hover {
+	color:inherit;
+
+  	
+}
+
 
 
 .news {

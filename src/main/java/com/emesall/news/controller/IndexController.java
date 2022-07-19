@@ -52,7 +52,7 @@ public class IndexController {
 			@RequestParam(required = false, value = "list") Long list_id, HttpServletRequest request,
 			@AuthenticationPrincipal User user) {
 
-		if (page == null) {
+		if (page == null || page==0) {
 			page = 1;
 		}
 		Page<FeedDTO> results;

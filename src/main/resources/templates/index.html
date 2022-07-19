@@ -62,10 +62,10 @@
 				th:if="${currentPage>3}"><span>...</span></a> <a
 				th:if="${currentPage==totalPages}"
 				th:href="${urlBuilder.replaceQueryParam('page',currentPage - 2).toUriString()}"><span
-				th:text="${currentPage-2}"></span></a> <a th:if="${currentPage>2}"
+				th:text="${currentPage-2}"></span></a> <a th:if="${currentPage>2 and currentPage<=totalPages}"
 				th:href="${urlBuilder.replaceQueryParam('page',currentPage - 1).toUriString()}"><span
 				th:text="${currentPage-1}"> </span></a> <a
-				th:if="${currentPage!=1 and currentPage!=totalPages}"
+				th:if="${currentPage!=1 and currentPage<totalPages}"
 				th:href="${urlBuilder.replaceQueryParam('page',currentPage).toUriString()}"
 				th:class="active"><span th:text="${currentPage}"> </span></a> <a
 				th:if="${currentPage<totalPages-1}"
