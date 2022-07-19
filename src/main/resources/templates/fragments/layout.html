@@ -63,7 +63,7 @@
 
 						<div class="dropdown-menu" aria-labelledby="ListsDropdown">
 							<div th:each="list: ${userLists}">
-								<a class="dropdown-item" th:href="@{'/list/'+${list.id}}"
+								<a class="dropdown-item" th:href="@{'/?list='+${list.id}}"
 									th:text="${list.name}"> text</a>
 							</div>
 

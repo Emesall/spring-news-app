@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.emesall.news.exception.NotFoundException;
+import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
 import com.emesall.news.repository.UserListRepository;
 import com.emesall.news.repository.UserRepository;
@@ -37,6 +39,16 @@ public class UserService implements UserDetailsService {
 
 	public Set<UserList> findAllLists() {
 		return userListRepository.findAll().stream().collect(Collectors.toSet());
+	}
+
+	public UserList findListById(Long id) {
+		return userListRepository.findById(id).orElseThrow(() -> new NotFoundException("List " + id + " not found"));
+
+	}
+
+	public Set<UserList> findListByUser(User user) {
+		return userListRepository.findListByUser(user).stream().collect(Collectors.toSet());
+
 	}
 
 }

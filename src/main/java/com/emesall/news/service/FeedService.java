@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import com.emesall.news.mapper.EntryToFeedMapper;
 import com.emesall.news.mapper.FeedMapper;
 import com.emesall.news.model.Category;
 import com.emesall.news.model.Feed;
+import com.emesall.news.model.UserList;
 import com.emesall.news.model.WebSite;
 import com.emesall.news.repository.FeedRepository;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -45,18 +47,22 @@ public class FeedService {
 		this.feedMapper = feedMapper;
 	}
 
-	
 	public Page<FeedDTO> fetchAll(Pageable pageable) {
 		return feedRepository.findAll(pageable).map(f -> feedMapper.feedToDto(f));
 	}
 
 	
+	
+	public Page<FeedDTO> fetchFromList(UserList userList, Pageable pageable) {
+		List<WebSite> websites = userList.getWebSites().stream().collect(Collectors.toList());
+		return feedRepository.findByWebSiteIn(websites, pageable).map(f -> feedMapper.feedToDto(f));
+	}
+
 	public Feed save(Feed feed) {
 
 		return feedRepository.save(feed);
 	}
 
-	
 	public List<Feed> readNewFeeds(WebSite webSite) throws IOException, FeedException, URISyntaxException {
 		SyndFeedInput input = new SyndFeedInput();
 		SyndFeed feed = input.build(new XmlReader(webSite.getUrl()));
@@ -91,20 +97,21 @@ public class FeedService {
 		return false; // feed is already in DB
 	}
 
-	
-	public Page<FeedDTO> fetchByCategory(Category category, Pageable pageable) {
-		List<FeedDTO> feeds = category.getFeeds().stream().map(f -> feedMapper.feedToDto(f)).toList();
+	private Page<Feed> getFeedsByCategory(Category category, Pageable pageable) {
+		List<Feed> feeds = category.getFeeds().stream().collect(Collectors.toList());
 		int start = (int) pageable.getOffset();
 		int end = Math.min((start + pageable.getPageSize()), feeds.size());
-		Page<FeedDTO> page = new PageImpl<FeedDTO>(feeds.subList(start, end), pageable, feeds.size());
-
+		Page<Feed> page = new PageImpl<Feed>(feeds.subList(start, end), pageable, feeds.size());
 		return page;
 	}
-
 	
+	public Page<FeedDTO> fetchByCategory(Category category, Pageable pageable) {
+		return getFeedsByCategory(category, pageable).map(feed->feedMapper.feedToDto(feed));
+	}
+
+
 	public void publishedAgo(Page<FeedDTO> feeds, Locale locale, ZoneId zone) {
 		feeds.forEach(f -> f.setPublishedAgo(PrettyTime.of(locale).printRelative(f.getInstant(), zone)));
-		
 
 	}
 

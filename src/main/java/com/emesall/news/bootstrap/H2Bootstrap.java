@@ -74,6 +74,18 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		list.setUser(userRepository.findById(1L).get());
 		list.setName("List1TEst");
 		userListRepository.save(list);
+		
+		UserList list2=new UserList();
+		list2.getWebSites().add(webSiteRepository.findById(3L).get());
+		list2.setUser(userRepository.findById(1L).get());
+		list2.setName("List2TEst");
+		userListRepository.save(list2);
+		
+		UserList list3=new UserList();
+		list3.getWebSites().add(webSiteRepository.findById(1L).get());
+		list3.setUser(userRepository.findById(2L).get());
+		list3.setName("List3");
+		userListRepository.save(list3);
 	}
 	
 	private void addUser() {
