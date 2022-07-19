@@ -21,7 +21,9 @@ public class NavController {
 		super();
 		this.userService = userService;
 	}
-
+	
+	
+	
 	@ModelAttribute("userLists")
 	public Set<UserList> getLists(@AuthenticationPrincipal User user) {
 		if (user != null) {

@@ -10,13 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.emesall.news.dto.FeedDTO;
+import com.emesall.news.exception.NotFoundException;
 import com.emesall.news.model.Category;
+import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
 import com.emesall.news.service.CategoryService;
 import com.emesall.news.service.FeedService;
@@ -46,7 +49,8 @@ public class IndexController {
 	@GetMapping("/")
 	public String index(Model model, @RequestParam(required = false, value = "tag") String cat_name,
 			@RequestParam(required = false, value = "page") Integer page,
-			@RequestParam(required = false, value = "list") Long list_id, HttpServletRequest request) {
+			@RequestParam(required = false, value = "list") Long list_id, HttpServletRequest request,
+			@AuthenticationPrincipal User user) {
 
 		if (page == null) {
 			page = 1;
@@ -57,6 +61,9 @@ public class IndexController {
 		// list of websites specified, data fetched only from them
 		if (list_id != null) {
 			UserList userList = userService.findListById(list_id);
+			if (!userList.getUser().equals(user)) {
+				throw new NotFoundException("List not Found");
+			}
 			results = feedService.fetchFromList(userList, pageable);
 
 			// data fetched from all websites

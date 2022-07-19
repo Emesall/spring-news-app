@@ -15,10 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.EqualsAndHashCode.Include;
 import lombok.experimental.SuperBuilder;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false,onlyExplicitlyIncluded = true)
 @SuperBuilder
 @Entity
 @Table(name = "users")
@@ -27,6 +28,7 @@ public class User extends BaseEntity implements UserDetails {
 	private static final long serialVersionUID = -4750867559738347947L;
 	
 	@NotBlank
+	@Include
 	private String email;
 	
 	@NotBlank

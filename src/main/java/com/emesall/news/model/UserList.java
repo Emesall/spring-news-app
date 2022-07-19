@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true,exclude = {"user","webSites"})
+@EqualsAndHashCode(callSuper = true,exclude = {"webSites"})
 public class UserList extends BaseEntity {
 
 	private static final long serialVersionUID = -1897286705997464492L;
