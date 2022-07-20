@@ -168,4 +168,8 @@
 .card{
 	margin: 4rem auto 0;
 }
+.card ul > li{
+	
+	margin: 5px;
+}
 

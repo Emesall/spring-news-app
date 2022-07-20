@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+<head>
+<meta charset="UTF-8" />
+<title>Settings</title>
+</head>
+<body>
+	<div class="row">
+		<div class="col-sm-1">
+			<p><b>List name:</b></p> 
+		</div>
+		<div class="col-sm-3 " >
+		
+			<input type="text" class="form-control" placeholder="List name..." />
+
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row ">
+			<div class="col-sm-3" th:each="cat: ${map.keySet()}">
+				<div class="card" >
+					<div class="card-header"  th:text="${cat.name}">Cat_name</div>
+					<ul class="list-group list-group-flush">
+						<li class="form-check" th:each="site:${map.get(cat)}">
+							<input class="form-check-input"
+								type="checkbox" value="" id="flexCheckDefault"> 
+							<label
+								class="form-check-label" for="flexCheckDefault" th:text="${site.url.getHost()}"> Website1
+							</label>
+						</li>
+				
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>
