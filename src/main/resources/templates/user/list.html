@@ -6,20 +6,24 @@
 <title>Settings</title>
 </head>
 <body>
-	<div class="row">
-		<div class="col-sm-1">
-			<p><b>List name:</b></p> 
-		</div>
-		<div class="col-sm-3 " >
-		
-			<input type="text" class="form-control" placeholder="List name..." />
 
+
+	
+	<div class="row" style="margin: 4rem auto 0;" >
+	<div class="col-sm-1">
+		<label for="list_name" ><b>List name:</b></label> 
+	</div>
+		<div class="col-sm-3">
+			<input type="text" id="list_name" class="form-control" placeholder="List name..." />
 		</div>
 	</div>
+	
+
+	
 
 	<div class="container">
 		<div class="row ">
-			<div class="col-sm-3" th:each="cat: ${map.keySet()}">
+			<div class="col-lg-3" th:each="cat: ${map.keySet()}">
 				<div class="card" >
 					<div class="card-header"  th:text="${cat.name}">Cat_name</div>
 					<ul class="list-group list-group-flush">
