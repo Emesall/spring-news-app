@@ -16,10 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.EqualsAndHashCode.Include;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Data
-@EqualsAndHashCode(callSuper = false,onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true,callSuper = false)
 @SuperBuilder
 @Entity
 @Table(name = "users")
@@ -72,7 +73,8 @@ public class User extends BaseEntity implements UserDetails {
 	public String getUsername() {
 		return email;
 	}
-	
+
+
 
 	
 

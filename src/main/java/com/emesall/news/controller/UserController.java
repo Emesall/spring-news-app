@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.emesall.news.exception.NotFoundException;
 import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
 import com.emesall.news.service.UserService;
@@ -39,25 +40,28 @@ public class UserController {
 	@GetMapping("/list/new")
 	public String initNewList(Model model) {
 		model.addAttribute("list", new UserList());
-		model.addAttribute("map",webSiteService.orderWebSitesByCategory());
+		model.addAttribute("map", webSiteService.orderWebSitesByCategory());
 
 		return "user/list";
 	}
 
 	@PostMapping("/list/update")
-	public String processList(@ModelAttribute("list") UserList userlist,@AuthenticationPrincipal User user) {
+	public String processList(@ModelAttribute("list") UserList userlist, @AuthenticationPrincipal User user) {
 
 		log.debug("Saving/updating list in database..");
 		userlist.setUser(user);
 		userService.saveUserList(userlist);
 		return "redirect:/settings";
 	}
-	
+
 	@GetMapping("/list/{id}/edit")
-	public String initNewList(Model model,@PathVariable("id") Long listId) {
-		
-		model.addAttribute("list", userService.findListById(listId));
-		model.addAttribute("map",webSiteService.orderWebSitesByCategory());
+	public String initNewList(Model model, @PathVariable("id") Long listId, @AuthenticationPrincipal User user) {
+		UserList userList = userService.findListById(listId);
+		if (!userList.getUser().equals(user)) {
+			throw new NotFoundException("List not found");
+		}
+		model.addAttribute("list", userList);
+		model.addAttribute("map", webSiteService.orderWebSitesByCategory());
 
 		return "user/list";
 	}
