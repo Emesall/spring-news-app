@@ -1,16 +1,23 @@
 package com.emesall.news.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
 import com.emesall.news.service.UserService;
 import com.emesall.news.service.WebSiteService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class UserController {
 
 	private final UserService userService;
@@ -37,10 +44,22 @@ public class UserController {
 		return "user/list";
 	}
 
-	@PostMapping("/list/new")
-	public String processNewList() {
+	@PostMapping("/list/update")
+	public String processList(@ModelAttribute("list") UserList userlist,@AuthenticationPrincipal User user) {
 
+		log.debug("Saving/updating list in database..");
+		userlist.setUser(user);
+		userService.saveUserList(userlist);
 		return "redirect:/settings";
+	}
+	
+	@GetMapping("/list/{id}/edit")
+	public String initNewList(Model model,@PathVariable("id") Long listId) {
+		
+		model.addAttribute("list", userService.findListById(listId));
+		model.addAttribute("map",webSiteService.orderWebSitesByCategory());
+
+		return "user/list";
 	}
 
 }

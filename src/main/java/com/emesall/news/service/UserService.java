@@ -50,5 +50,9 @@ public class UserService implements UserDetailsService {
 		return userListRepository.findListByUser(user).stream().collect(Collectors.toSet());
 
 	}
+	
+	public UserList saveUserList(UserList list) {
+		return userListRepository.save(list);
+	}
 
 }

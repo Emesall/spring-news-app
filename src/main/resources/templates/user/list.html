@@ -8,13 +8,15 @@
 <body>
 
 
-	
+	<form th:object="${list}" th:action="@{/list/update}"
+					th:method="post">
+	<input type="hidden" th:field="*{id}" />
 	<div class="row" style="margin: 4rem auto 0;" >
 	<div class="col-sm-1">
 		<label for="list_name" ><b>List name:</b></label> 
 	</div>
 		<div class="col-sm-3">
-			<input type="text" id="list_name" class="form-control" placeholder="List name..." />
+			<input type="text" id="list_name" class="form-control" placeholder="List name..." th:field="*{name}" />
 		</div>
 	</div>
 	
@@ -29,7 +31,7 @@
 					<ul class="list-group list-group-flush">
 						<li class="form-check" th:each="site:${map.get(cat)}">
 							<input class="form-check-input"
-								type="checkbox" value="" id="flexCheckDefault"> 
+								type="checkbox" th:value="${site.id}" id="flexCheckDefault" th:field="*{webSites}"> 
 							<label
 								class="form-check-label" for="flexCheckDefault" th:text="${site.url.getHost()}"> Website1
 							</label>
@@ -42,7 +44,12 @@
 		</div>
 
 	</div>
-
+	<div class="form-group" >
+			
+				<button type="Submit" class="btn btn-outline-dark" th:text="Save">Save</button>
+			
+		</div>
+	</form>
 
 </body>
 
