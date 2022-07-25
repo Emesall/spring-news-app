@@ -181,6 +181,27 @@
 
 
 
+table.table-striped.table-hover tbody tr:hover {
+	background: #f5f5f5;
+}
+
+table.table td a.edit {
+	color: #FFC107;
+}
+table.table td a.delete {
+	color: #F44336;
+}
+
+
+.table-title .btn {
+	float: right;
+	font-size: 13px;
+	margin:0;
+}
+
+
+
+
 
 
 

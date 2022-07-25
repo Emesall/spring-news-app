@@ -28,6 +28,8 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
+		.antMatchers("/settings")
+		.authenticated()
 		.antMatchers("/")
 		.permitAll()
 		.and()

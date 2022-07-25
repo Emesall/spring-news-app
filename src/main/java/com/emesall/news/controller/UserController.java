@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.emesall.news.exception.NotFoundException;
 import com.emesall.news.model.User;
@@ -32,8 +33,9 @@ public class UserController {
 	}
 
 	@GetMapping("/settings")
-	public String settings() {
+	public String settings(Model model,@AuthenticationPrincipal User user) {
 
+		model.addAttribute("lists",userService.findListByUser(user));
 		return "user/settings";
 	}
 
@@ -64,6 +66,13 @@ public class UserController {
 		model.addAttribute("map", webSiteService.orderWebSitesByCategory());
 
 		return "user/list";
+	}
+	
+	@GetMapping("/list/{id}/delete")
+	public String deleteList(@PathVariable Long id, Model model) {
+		log.debug("Deleting list with ID: " + id);
+		userService.deleteUserListById(id);
+		return "redirect:/settings";
 	}
 
 }

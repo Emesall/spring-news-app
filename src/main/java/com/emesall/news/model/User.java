@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.EqualsAndHashCode.Include;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Data

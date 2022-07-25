@@ -54,5 +54,9 @@ public class UserService implements UserDetailsService {
 	public UserList saveUserList(UserList list) {
 		return userListRepository.save(list);
 	}
+	
+	public void deleteUserListById(Long id) {
+		userListRepository.deleteById(id);
+	}
 
 }
