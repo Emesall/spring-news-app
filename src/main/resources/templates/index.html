@@ -48,8 +48,9 @@
 	<div class="pagination"
 		th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
 		<div th:if="${totalPages>=2}">
-		<a th:href="${urlBuilder.replaceQueryParam('page',currentPage-1).toUriString()}"
-			th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a>
+			<a
+				th:href="${urlBuilder.replaceQueryParam('page',currentPage-1).toUriString()}"
+				th:class="${currentPage==1 ? 'disabled' : ''}">&laquo;</a>
 		</div>
 		<div th:if="${totalPages<=6 && totalPages>0}">
 			<a th:each="i: ${#numbers.sequence(1, totalPages)}"
@@ -62,7 +63,8 @@
 				th:if="${currentPage>3}"><span>...</span></a> <a
 				th:if="${currentPage==totalPages}"
 				th:href="${urlBuilder.replaceQueryParam('page',currentPage - 2).toUriString()}"><span
-				th:text="${currentPage-2}"></span></a> <a th:if="${currentPage>2 and currentPage<=totalPages}"
+				th:text="${currentPage-2}"></span></a> <a
+				th:if="${currentPage>2 and currentPage<=totalPages}"
 				th:href="${urlBuilder.replaceQueryParam('page',currentPage - 1).toUriString()}"><span
 				th:text="${currentPage-1}"> </span></a> <a
 				th:if="${currentPage!=1 and currentPage<totalPages}"
@@ -81,13 +83,14 @@
 
 		</div>
 		<div th:if="${totalPages>=2}">
-		<a
-			th:href="${urlBuilder.replaceQueryParam('page',currentPage + 1).toUriString()}"
-			th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
+			<a
+				th:href="${urlBuilder.replaceQueryParam('page',currentPage + 1).toUriString()}"
+				th:class="${currentPage==totalPages ? 'disabled' : ''}">&raquo;</a>
 		</div>
 
 
 	</div>
+
 
 
 </body>

@@ -199,6 +199,52 @@ table.table td a.delete {
 	margin:0;
 }
 
+.btn.btn-block {
+    border-radius: 20px;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.btn.btn-block:hover {
+    background-color: rgb(96, 96, 96);
+    color: var(--white);
+}
+
+.form-check a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 700;
+}
+
+.form-check a:hover {
+    text-decoration: none;
+    color: rgb(96, 96, 96);
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #400485;
+    color: #400485
+}
+
+.input-field:hover {
+    color: #7b4ca0;
+    border: 1px solid #7b4ca0
+}
+
+input {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    padding: 0px 2px;
+}
+
+
 
 
 

@@ -4,64 +4,66 @@
 <head>
 <meta charset="UTF-8" />
 <title>Login</title>
+
 </head>
 <body>
+	<div class="container">
+		<div class="row justify-content-sm-center">
+			<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+				<div class="card shadow-lg">
+					<div class="card-body p-5">
+						<h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
+						<form method="POST" class="needs-validation" novalidate=""
+							autocomplete="off">
+							<div class="mb-3">
 
-	<h2>Login</h2>
+								<label class="mb-2 text-muted" for="email">E-Mail
+									Address</label>
+								<div class="input-field">
+									<span class="far fa-user p-2"></span> <input id="email"
+										type="email" name="email" value="" required autofocus>
 
-	<div th:if="${param.error}" class="alert alert-danger"
-		th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message</div>
-	<div th:if="${param.logout}" class="alert alert-success text-center">
-		You have been logged out.</div>
-	<div th:if="${param.registered}"
-		class="alert alert-success text-center">Successfully registered.</div>
-	<div th:if="${param.passChanged}"
-		class="alert alert-success text-center">Your password has been
-		successfully changed.</div>
-	<div th:if="${param.expired}" class="alert alert-success text-center">Link
-		expired.</div>
-	<form class="form-horizontal" th:action="@{/login}" method="POST"
-		id="loginForm">
-		<div class="form-group has-feedback">
+									<div class="invalid-feedback">Email is invalid</div>
+								</div>
+							</div>
+							<div class="mb-3">
+								<div class="mb-2 w-100">
+									<label class="text-muted" for="password">Password</label>
 
-			<div class="row" style="margin-top: 20px">
-				<label class="col-sm-2 control-label">Username</label>
-				<div class="col-md-3">
+								</div>
+								<div class="input-field">
+								<span class="fas fa-lock p-2"></span>
+									<input id="password" type="password" name="password" required>
+									<div class="invalid-feedback">Password is required</div>
+								</div>
+							</div>
 
-					<input class="form-control" type="text" name="username"
-						id="username" />
 
+							<div class="mb-4 w-100">
+								<div class="form-check">
+									<input type="checkbox" name="remember" id="remember"
+										class="form-check-input"> <label for="remember"
+										class="form-check-label">Remember Me</label> <a
+										href="forgot.html" class="float-end"> Forgot Password? </a>
+								</div>
+
+
+
+							</div>
+
+							<button class="btn btn-block text-center my-3 w-100">Log
+								in</button>
+						</form>
+					</div>
+					<div class="card-footer py-3 border-0">
+						<div class="text-center">
+							Don't have an account? <a href="register.html" class="text-dark">Create
+								One</a>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="row" style="margin-top: 10px">
-
-				<label class="col-sm-2 control-label">Password</label>
-				<div class="col-md-3 ">
-
-					<input class="form-control" type="password" name="password"
-						id="password" />
-
-				</div>
-			</div>
-
 		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<input type="checkbox" name="remember-me" /> <label>
-					Remember me</label>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button class="btn btn-default" type="submit" th:text="Login">Login</button>
-			</div>
-			<div class="col-sm-offset-4 col-sm-5">
-				<a th:href="@{/forgotPassword}">Forgot password?</a>
-			</div>
-		</div>
-	</form>
-	<div>
-		New here? Click <a th:href="@{/register/owner}">here</a> to register.
 	</div>
 
 </body>
