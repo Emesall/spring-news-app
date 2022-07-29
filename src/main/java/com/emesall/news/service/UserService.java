@@ -54,9 +54,21 @@ public class UserService implements UserDetailsService {
 	public UserList saveUserList(UserList list) {
 		return userListRepository.save(list);
 	}
+	public User saveUser(User user) {
+		return repository.save(user);
+	}
 	
 	public void deleteUserListById(Long id) {
 		userListRepository.deleteById(id);
+	}
+	
+	public boolean checkIfUserExists(User user) {
+
+		if (repository.findByEmail(user.getUsername()).isPresent() ) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

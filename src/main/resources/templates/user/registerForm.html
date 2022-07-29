@@ -1,23 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{fragments/layout :: layout (~{::body},'home')}">
-<head>
-<meta charset="UTF-8" />
-<title>Login</title>
 
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
 <body>
-	<div th:if="${param.error}" class="alert alert-danger"
-		th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message</div>
-	<div th:if="${param.logout}" class="alert alert-success text-center">
-		You have been logged out.</div>
-	<div th:if="${param.registered}"
-		class="alert alert-success text-center">Successfully registered.</div>
-	<div th:if="${param.passChanged}"
-		class="alert alert-success text-center">Your password has been
-		successfully changed.</div>
-	<div th:if="${param.expired}" class="alert alert-success text-center">Link
-		expired.</div>
+
+	<h2>Register</h2>
+
 	<div class="container">
 		<div class="row justify-content-sm-center">
 			<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
@@ -67,7 +56,7 @@
 					</div>
 					<div class="card-footer py-3 border-0">
 						<div class="text-center">
-							Don't have an account? <a th:href="@{/register}">Create One</a>
+							Don't have an account? <a href="register.html">Create One</a>
 						</div>
 					</div>
 				</div>
@@ -75,8 +64,5 @@
 		</div>
 	</div>
 
-
-
 </body>
-
 </html>
