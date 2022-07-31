@@ -51,12 +51,12 @@ public class RegisterController {
 		User user=formToUser.registerFormToUser(form, encoder);
 		// check if user exists in database
 		if (userService.checkIfUserExists(user))
-			bindingResult.rejectValue("username", "username.exists");
+			bindingResult.rejectValue("email", "email.exists");
 		// check if there are some validations errors
 		if (bindingResult.hasErrors())
 			return USER_REGISTER_FORM;
 		else {
-
+			user.setEnabled(true); //later mail confirmation
 			userService.saveUser(user);
 		
 			// save user

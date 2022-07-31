@@ -5,23 +5,27 @@
 
 <body>
 
-	<h2>Register</h2>
 
 	<div class="container">
 		<div class="row justify-content-sm-center">
 			<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
 				<div class="card shadow-lg">
 					<div class="card-body p-5">
-						<h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
-						<form method="POST" th:action="@{/login}" autocomplete="off">
+						<h1 class="fs-4 card-title fw-bold mb-4 text-center">Create
+							Account</h1>
+						<form method="POST" th:object="${registerForm}"
+							th:action="@{/register}">
+
 							<div class="mb-3">
 
-								<label class="mb-2 text-muted" for="email">E-Mail
-									Address</label>
+								<label class="mb-2 text-muted" for="email">E-Mail</label>
 								<div class="input-field">
-									<span class="far fa-user p-2"></span> <input id="username"
-										type="email" name="username" value="" required autofocus>
+									<span class="fas fa-envelope p-2"></span> <input id="email"
+										type="email" name="email" value="" required autofocus>
 
+									<th:block th:if="${#fields.hasErrors('email')}">
+										<span class="fa-solid fa-xmark" aria-hidden="true"></span>
+									</th:block>
 
 								</div>
 							</div>
@@ -33,32 +37,53 @@
 								<div class="input-field">
 									<span class="fas fa-lock p-2"></span> <input id="password"
 										type="password" name="password" required>
+									<th:block th:if="${#fields.hasErrors('password')}">
+										<span class="fa-solid fa-xmark" aria-hidden="true"></span>
+									</th:block>
+								</div>
+							</div>
+							<div class="mb-3">
+
+								<label class="mb-2 text-muted" for="matchingPassword">Confirm
+									Password</label>
+								<div class="input-field">
+									<span class="fas fa-lock p-2"></span> <input
+										id="matchingPassword" type="password" name="matchingPassword"
+										value="" required autofocus>
+									<th:block th:if="${#fields.hasErrors('password')}">
+										<span class="fa-solid fa-xmark" aria-hidden="true"></span>
+									</th:block>
+								</div>
+							</div>
+
+							<div class="mb-3">
+
+								<label class="mb-2 text-muted" for="firstName">First
+									Name</label>
+								<div class="input-field">
+									<span class="far fa-user p-2"></span> <input id="firstName"
+										type="text" name="firstName" value="">
+
+
+								</div>
+							</div>
+							<div class="mb-3">
+
+								<label class="mb-2 text-muted" for="lastName">Last Name</label>
+								<div class="input-field">
+									<span class="far fa-user p-2"></span> <input id="lastName"
+										type="text" name="lastName" value="">
+
 
 								</div>
 							</div>
 
 
-							<div class="mb-4 w-100">
-								<div class="form-check">
-									<input type="checkbox" name="remember" id="remember"
-										class="form-check-input"> <label for="remember"
-										class="form-check-label">Remember Me</label> <a
-										href="forgot.html" class="float-end"> Forgot Password? </a>
-								</div>
-
-
-
-							</div>
-
-							<button class="btn btn-block text-center my-3 w-100">Log
-								in</button>
+							<button class="btn btn-block text-center my-3 w-100">Sign
+								up</button>
 						</form>
 					</div>
-					<div class="card-footer py-3 border-0">
-						<div class="text-center">
-							Don't have an account? <a href="register.html">Create One</a>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>
