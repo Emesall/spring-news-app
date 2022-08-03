@@ -7,7 +7,7 @@ import com.emesall.news.dto.RegistrationForm;
 import com.emesall.news.model.User;
 
 @Component
-public class RegisterFormToUser {
+public class RegisterFormToUserMapper {
 
 	public User registerFormToUser(RegistrationForm registerForm, PasswordEncoder encoder) {
 

@@ -16,7 +16,20 @@
 --background:#fff;
 --color:#222;
 }
-
+a{
+	font-family: NewsFont;
+	font-size: 14px;
+}
+h1{
+	font-family:NewsFont;
+}
+h4{
+	font-family:NewsFont;
+}
+label{
+	font-family: NewsFont;
+	font-size:14px;
+}
 .navbar-header{
         height: 50px;
         display: flex;
@@ -30,7 +43,7 @@
 }
 
 .nav-item{
-	font-family:DateFont;
+
 	letter-spacing: 0.9px;
 	font-weight: bold;
 	color:var(--black);
@@ -40,14 +53,14 @@
 
 .nav-item form > button {
 	
-	font-family:DateFont;
+	font-family:NewsFont;
 	letter-spacing: 0.9px;
   	text-decoration: inherit;
   	font-weight: inherit;
   	color:inherit;
   	border-width: 0;
   	background-color: inherit;
-  	font-size: inherit;
+  	font-size: 14px;
   	display: inherit;
 
   	
@@ -109,6 +122,7 @@
 }
 
 .news-cat a {
+	font-family:DateFont;
 	text-decoration: none;
 	color:var(--color);
 	transition: opacity .3s ease;
@@ -195,19 +209,12 @@ table.table-striped.table-hover tbody tr:hover {
 	background: #f5f5f5;
 }
 
-table.table td a.edit {
-	color: #FFC107;
-}
-table.table td a.delete {
-	color: #F44336;
-}
-
 
 .table-title .btn {
-	float: right;
 	font-size: 13px;
 	margin:0;
 }
+
 
 .btn.btn-block {
     border-radius: 20px;
@@ -272,7 +279,24 @@ input {
    box-shadow: 0 0 0 0.2rem rgba(0,0,0,0)!important;
 }
 
+table.table td a.delete {
+    color:rgb(244, 125, 113);
 
+}
+table.table td a.delete:hover {
+  font-size:1.27em;
+  transition: 0.25s ease-out;
+
+}
+table.table td a.edit {
+    color:rgb(0, 0, 128);
+
+}
+table.table td a.edit:hover {
+  font-size:1.27em;
+  transition: 0.25s ease-out;
+
+}
 
 
 

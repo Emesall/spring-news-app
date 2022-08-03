@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+	th:replace="~{fragments/layout :: layout (~{::body},'lists')}">
 <head>
 <meta charset="UTF-8" />
-<title>Settings</title>
+<title>List</title>
 </head>
 <body>
 
-
-	<form th:object="${list}" th:action="@{/list/update}"
-					th:method="post">
-	<input type="hidden" th:field="*{id}" />
-	<div class="row" style="margin: 4rem auto 0;" >
-	<div class="col-sm-1">
-		<label for="list_name" ><b>List name:</b></label> 
-	</div>
-		<div class="col-sm-3">
-			<input type="text" id="list_name" class="form-control" placeholder="List name..." th:field="*{name}" />
-		</div>
-	</div>
-	
-
-	
-
 	<div class="container">
-		<div class="row ">
-			<div class="col-lg-3" th:each="cat: ${map.keySet()}">
-				<div class="card" >
-					<div class="card-header"  th:text="${cat.name}">Cat_name</div>
-					<ul class="list-group list-group-flush">
-						<li class="form-check" th:each="site:${map.get(cat)}">
-							<input class="form-check-input"
-								type="checkbox" th:value="${site.id}" id="flexCheckDefault" th:field="*{webSites}"> 
-							<label
-								class="form-check-label" for="flexCheckDefault" th:text="${site.url.getHost()}"> Website1
-							</label>
-						</li>
-				
-					</ul>
-				</div>
+		<div class="card shadow-lg ">
+			<div class="card-body p-5">
+				<h4 class="fs-4 card-title fw-bold mb-4 text-center">Add new
+					list</h4>
+				<form th:object="${list}" th:action="@{/list/update}"
+					th:method="post">
+					<input type="hidden" th:field="*{id}" />
+					<div class="mb-2" style="width: 200px">
 
+						<label class="mb-2 text-muted" for="listName">List name:</label>
+						<div class="input-field">
+							<span class="far fa-user p-2"></span> <input id="listName"
+								type="text" name="listName" placeholder="List name..."
+								th:field="*{name}">
+
+
+						</div>
+					</div>
+
+
+					<div class="row ">
+						<div class="col-lg-3" th:each="cat: ${map.keySet()}">
+							<div class="card">
+								<div class="card-header" th:text="${cat.name}">Cat_name</div>
+								<ul class="list-group list-group-flush">
+									<li class="form-check" th:each="site:${map.get(cat)}"><input
+										class="form-check-input" type="checkbox" th:value="${site.id}"
+										id="flexCheckDefault" th:field="*{webSites}"> <label
+										class="form-check-label" for="flexCheckDefault"
+										th:text="${site.url.getHost()}"> Website1 </label></li>
+
+								</ul>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="form-group text-center mt-5 ">
+
+						<button type="Submit" class="btn btn-block w-25" th:text="Save">Save</button>
+
+					</div>
+
+				</form>
 			</div>
 		</div>
-
 	</div>
-	<div class="form-group" >
-			
-				<button type="Submit" class="btn btn-outline-dark" th:text="Save">Save</button>
-			
-		</div>
-	</form>
-
 </body>
 
 </html>

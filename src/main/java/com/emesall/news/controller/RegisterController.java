@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.emesall.news.dto.RegistrationForm;
-import com.emesall.news.mapper.RegisterFormToUser;
+import com.emesall.news.mapper.RegisterFormToUserMapper;
 import com.emesall.news.model.User;
 import com.emesall.news.service.UserService;
 
@@ -22,14 +22,14 @@ public class RegisterController {
 
 	
 	private static final String USER_REGISTER_FORM = "user/registerForm";
-	private final RegisterFormToUser formToUser;
+	private final RegisterFormToUserMapper formToUser;
 	private final PasswordEncoder encoder;
 	private final UserService userService;
 	
 	
 	
 	@Autowired
-	public RegisterController(RegisterFormToUser formToUser, PasswordEncoder encoder,UserService userService) {
+	public RegisterController(RegisterFormToUserMapper formToUser, PasswordEncoder encoder,UserService userService) {
 		super();
 		this.formToUser = formToUser;
 		this.encoder = encoder;
