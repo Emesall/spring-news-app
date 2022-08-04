@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -73,7 +74,9 @@ public class User extends BaseEntity implements UserDetails {
 		return email;
 	}
 
-
+	public void setPassword(PasswordEncoder passwordEncoder,String password) {
+		this.setPassword(passwordEncoder.encode(password));
+	}
 
 	
 

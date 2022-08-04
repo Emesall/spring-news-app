@@ -37,6 +37,11 @@ public class UserService implements UserDetailsService {
 
 	}
 
+	public User findUserByEmail(String email) throws UsernameNotFoundException  {
+		return repository.findByEmail(email)
+				.orElseThrow(() -> new NotFoundException("User " + email + " not found"));
+	}
+
 	public Set<UserList> findAllLists() {
 		return userListRepository.findAll().stream().collect(Collectors.toSet());
 	}
@@ -50,21 +55,22 @@ public class UserService implements UserDetailsService {
 		return userListRepository.findListByUser(user).stream().collect(Collectors.toSet());
 
 	}
-	
+
 	public UserList saveUserList(UserList list) {
 		return userListRepository.save(list);
 	}
+
 	public User saveUser(User user) {
 		return repository.save(user);
 	}
-	
+
 	public void deleteUserListById(Long id) {
 		userListRepository.deleteById(id);
 	}
-	
+
 	public boolean checkIfUserExists(User user) {
 
-		if (repository.findByEmail(user.getUsername()).isPresent() ) {
+		if (repository.findByEmail(user.getUsername()).isPresent()) {
 			return true;
 		}
 

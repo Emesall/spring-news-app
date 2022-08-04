@@ -10,6 +10,16 @@
 
 	<div class="container">
 		<div class="row" style="margin-top: 20px">
+			<div th:if="${param.passWrong}"
+				class="alert alert-danger text-center">Passwords do not
+				match.</div>
+			<div th:if="${param.passChanged}"
+				class="alert alert-success text-center">Your password has been
+				successfully changed.</div>
+				<div th:if="${param.nameUpdated}"
+				class="alert alert-success text-center">Your account details have been
+				successfully changed.</div>
+
 			<div class="col-md-4">
 				<div class="card shadow-lg ">
 					<div class="card-body p-5">
@@ -22,7 +32,7 @@
 									Name</label>
 								<div class="input-field">
 									<span class="far fa-user p-2"></span> <input id="firstName"
-										type="text" name="firstName" th:field="*{firstName}">
+										type="text" name="firstName" th:field="*{firstName}" required>
 
 
 								</div>
@@ -35,7 +45,7 @@
 									Name</label>
 								<div class="input-field">
 									<span class="far fa-user p-2"></span> <input id="firstName"
-										type="text" name="firstName" th:field="*{lastName}">
+										type="text" name="firstName" th:field="*{lastName}" required>
 
 
 								</div>
@@ -44,46 +54,50 @@
 
 
 							<button type="Submit" class="btn btn-block text-center my-3 w-50"
-								th:text="Save">Save</button>
+								th:text="Save" value="saveName">Save</button>
 
 						</form>
 					</div>
 				</div>
 			</div>
 
-
 			<div class="col-md-4">
+
 				<div class="card shadow-lg">
 					<div class="card-body p-5">
-						<h4 class="fs-4 card-title fw-bold mb-4">Change your password</h4>
-						<div class="mb-3">
-							<label class="mb-2 text-muted" for="password">New
-								password</label>
+						<form class="form-horizontal" th:object=${passwordForm}
+							th:action="@{/changePassword}" method="POST" id="passwordForm">
+							<h4 class="fs-4 card-title fw-bold mb-4">Change your
+								password</h4>
+							<div class="mb-3">
+								<label class="mb-2 text-muted" for="password">New
+									password</label>
 
-							<div class="input-field">
-								<span class="fas fa-lock p-2"></span> <input id="password"
-									type="password" name="password" required>
+								<div class="input-field">
+									<span class="fas fa-lock p-2"></span> <input id="password"
+										type="password" name="password" th:field="*{password}"
+										required>
+
+								</div>
+
+							</div>
+							<div class="mb-3">
+
+								<label class="mb-2 text-muted" for="matchingPassword">Confirm
+									password</label>
+								<div class="input-field">
+									<span class="fas fa-lock p-2"></span> <input
+										id="matchingPassword" type="password" name="matchingPassword"
+										required th:field="*{matchingPassword}">
+
+								</div>
 
 							</div>
 
-						</div>
-						<div class="mb-3">
 
-							<label class="mb-2 text-muted" for="matchingPassword">Confirm
-								password</label>
-							<div class="input-field">
-								<span class="fas fa-lock p-2"></span> <input
-									id="matchingPassword" type="password" name="matchingPassword"
-									required>
-
-							</div>
-
-						</div>
-
-
-						<button type="Submit" class="btn btn-block text-center my-3 w-50"
-							th:text="Save">Save</button>
-
+							<button type="Submit" class="btn btn-block text-center my-3 w-50"
+								th:text="Save" value="SavePassword">Save</button>
+						</form>
 					</div>
 
 				</div>

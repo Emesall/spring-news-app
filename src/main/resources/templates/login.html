@@ -10,20 +10,20 @@
 
 	<div class="container">
 		<div class="row justify-content-sm-center">
+			<div th:if="${param.error}" class="alert alert-danger text-center"
+				th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message</div>
+			<div th:if="${param.logout}" class="alert alert-success text-center">
+				You have been logged out.</div>
+			<div th:if="${param.registered}"
+				class="alert alert-success text-center">Successfully
+				registered.</div>
+			<div th:if="${param.passChanged}"
+				class="alert alert-success text-center">Your password has been
+				successfully changed.</div>
+			<div th:if="${param.expired}" class="alert alert-success text-center">Link
+				expired.</div>
+			<div class="col-xxl-5 col-xl-6 col-lg-6 col-md-7 col-sm-9">
 
-			<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-				<div th:if="${param.error}" class="alert alert-danger"
-					th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message</div>
-				<div th:if="${param.logout}" class="alert alert-success text-center">
-					You have been logged out.</div>
-				<div th:if="${param.registered}"
-					class="alert alert-success text-center">Successfully
-					registered.</div>
-				<div th:if="${param.passChanged}"
-					class="alert alert-success text-center">Your password has
-					been successfully changed.</div>
-				<div th:if="${param.expired}"
-					class="alert alert-success text-center">Link expired.</div>
 				<div class="card shadow-lg">
 					<div class="card-body p-5">
 						<h1 class="fs-4 card-title fw-bold mb-4 text-center">Login</h1>
@@ -57,7 +57,7 @@
 									<input type="checkbox" name="remember" id="remember"
 										class="form-check-input"> <label for="remember"
 										class="form-check-label">Remember Me</label> <a
-										href="forgot.html" class="float-end"> Forgot Password? </a>
+										th:href="@{/forgotPassword}" class="float-end"> Forgot Password? </a>
 								</div>
 
 
