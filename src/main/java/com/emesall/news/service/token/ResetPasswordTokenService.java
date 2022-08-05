@@ -29,7 +29,7 @@ public class ResetPasswordTokenService implements TokenService {
 	@Override
 	public ResetPasswordToken getToken(String token) {
 		return tokenRepository.getByToken(token)
-				.orElseThrow(() -> new NotFoundException("Something went wrong with changing your password.Try again later"));
+				.orElseThrow(() -> new NotFoundException("Link is invalid."));
 
 	}
 

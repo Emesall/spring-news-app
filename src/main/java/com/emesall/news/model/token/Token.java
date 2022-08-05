@@ -27,7 +27,7 @@ import lombok.Setter;
 public abstract class Token extends BaseEntity {
 
 	private static final long serialVersionUID = 4144147332782838684L;
-	private static final int EXPIRATION = 60 * 24;
+	private static final int EXPIRATION = 60; //min
 
 	private String token;
 	@OneToOne(fetch = FetchType.EAGER)

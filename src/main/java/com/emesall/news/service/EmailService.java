@@ -30,7 +30,7 @@ public class EmailService {
 
 
 
-	public void sendEmail(User user, String contextPath, Locale locale) {
+	public void sendResetPasswordEmail(User user, String contextPath, Locale locale) {
 		
 		String token = UUID.randomUUID().toString();
 		tokenService.createAndSaveToken(user, token);

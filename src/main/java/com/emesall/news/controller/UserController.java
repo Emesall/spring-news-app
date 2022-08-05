@@ -98,7 +98,7 @@ public class UserController {
 				return FORGOT_PASSWORD_TEMPLATE;
 			} else {
 				try {
-					emailService.sendEmail(user, request.getContextPath(), request.getLocale());
+					emailService.sendResetPasswordEmail(user, request.getContextPath(), request.getLocale());
 				} catch (Exception ex) {
 					return "redirect:/forgotPassword?problem";
 				}
@@ -116,11 +116,7 @@ public class UserController {
 	public String initChangePassword(Model model, @RequestParam("token") String token) {
 
 		ResetPasswordToken resetToken = resetTokenService.getToken(token);
-		if (resetToken == null) {
-			log.debug("Token null");
-			return "redirect:/login?wrongToken";
-		}
-
+		
 		Instant instant = Instant.now();
 		if (resetToken.getExpirationDate().isBefore(instant)) {
 			log.debug("Token expired");
@@ -137,6 +133,7 @@ public class UserController {
 	public String processChangePassword(@ModelAttribute("passwordForm") @Valid ChangePasswordForm passwordForm,
 			BindingResult bindingResult, Model model, @AuthenticationPrincipal User user) {
 
+		//if user is logged in
 		if (user != null) {
 			if (bindingResult.hasErrors()) {
 				return "redirect:/settings?passWrong";
@@ -147,8 +144,10 @@ public class UserController {
 
 			return "redirect:/settings?passChanged";
 
+			//if user forgot password and is not logged in
 		} else {
 			if (bindingResult.hasErrors()) {
+				model.addAttribute("wrongPass", true);
 				return CHANGE_PASSWORD_TEMPLATE;
 			}
 			ResetPasswordToken token = resetTokenService.getToken(passwordForm.getToken());
