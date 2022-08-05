@@ -24,9 +24,7 @@ import com.emesall.news.model.User;
 import com.emesall.news.model.token.ResetPasswordToken;
 import com.emesall.news.service.EmailService;
 import com.emesall.news.service.UserService;
-import com.emesall.news.service.WebSiteService;
 import com.emesall.news.service.token.ResetPasswordTokenService;
-import com.emesall.news.service.token.VerificationTokenService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,25 +36,20 @@ public class UserController {
 	private static final String FORGOT_PASSWORD_TEMPLATE = "user/forgotPassword";
 	private static final String CHANGE_PASSWORD_TEMPLATE = "user/changePassword";
 	private final UserService userService;
-	private final WebSiteService webSiteService;
 	private final ChangeNameFormMapper nameFormMapper;
 	private final EmailService emailService;
 	private final ResetPasswordTokenService resetTokenService;
-	private final VerificationTokenService verificationTokenService;
 	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public UserController(UserService userService, WebSiteService webSiteService, ChangeNameFormMapper nameFormMapper,
-			EmailService emailService, ResetPasswordTokenService resetTokenService,
-			VerificationTokenService verificationTokenService, PasswordEncoder passwordEncoder) {
+	public UserController(UserService userService, ChangeNameFormMapper nameFormMapper, EmailService emailService,
+			ResetPasswordTokenService resetTokenService, PasswordEncoder passwordEncoder) {
 		super();
 		this.userService = userService;
-		this.webSiteService = webSiteService;
 		this.nameFormMapper = nameFormMapper;
 		this.emailService = emailService;
-		this.resetTokenService = resetTokenService;
-		this.verificationTokenService = verificationTokenService;
 		this.passwordEncoder = passwordEncoder;
+		this.resetTokenService = resetTokenService;
 	}
 
 	@GetMapping("/settings")
@@ -116,7 +109,7 @@ public class UserController {
 	public String initChangePassword(Model model, @RequestParam("token") String token) {
 
 		ResetPasswordToken resetToken = resetTokenService.getToken(token);
-		
+
 		Instant instant = Instant.now();
 		if (resetToken.getExpirationDate().isBefore(instant)) {
 			log.debug("Token expired");
@@ -133,7 +126,7 @@ public class UserController {
 	public String processChangePassword(@ModelAttribute("passwordForm") @Valid ChangePasswordForm passwordForm,
 			BindingResult bindingResult, Model model, @AuthenticationPrincipal User user) {
 
-		//if user is logged in
+		// if user is logged in
 		if (user != null) {
 			if (bindingResult.hasErrors()) {
 				return "redirect:/settings?passWrong";
@@ -144,7 +137,7 @@ public class UserController {
 
 			return "redirect:/settings?passChanged";
 
-			//if user forgot password and is not logged in
+			// if user forgot password and is not logged in
 		} else {
 			if (bindingResult.hasErrors()) {
 				model.addAttribute("wrongPass", true);

@@ -20,8 +20,10 @@
 			<div th:if="${param.passChanged}"
 				class="alert alert-success text-center">Your password has been
 				successfully changed.</div>
-			<div th:if="${param.expired}" class="alert alert-success text-center">Link
+			<div th:if="${param.expired}" class="alert alert-danger text-center">Link
 				expired.</div>
+			<div th:if="${param.enabled}"
+				class="alert alert-success text-center">Your account is active. Now you can log in.</div>
 			<div class="col-xxl-5 col-xl-6 col-lg-6 col-md-7 col-sm-9">
 
 				<div class="card shadow-lg">
@@ -57,7 +59,8 @@
 									<input type="checkbox" name="remember" id="remember"
 										class="form-check-input"> <label for="remember"
 										class="form-check-label">Remember Me</label> <a
-										th:href="@{/forgotPassword}" class="float-end"> Forgot Password? </a>
+										th:href="@{/forgotPassword}" class="float-end"> Forgot
+										Password? </a>
 								</div>
 
 
