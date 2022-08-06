@@ -40,6 +40,14 @@ label{
 }
 .navbar-toggler {
   float: right;
+     border-color: white !important;
+
+}
+
+
+.navbar-toggler:focus {
+
+    box-shadow: none!important;
 }
 
 .nav-item{
@@ -299,6 +307,15 @@ table.table td a.edit:hover {
 }
 
 
+ @media (min-width:480px)
+ { .dropdown:hover .dropdown-menu 	{
+    	display: block;
+    	margin-top: 0; 
+ 	}
+	.dropdown-item a:active {
+    	color: white;
+	} 
+ }
 
 
 

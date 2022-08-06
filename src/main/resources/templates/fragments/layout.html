@@ -12,6 +12,7 @@
 
 <title>ShortNews</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/js/script.js}">
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -27,10 +28,10 @@
 	integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
 	crossorigin="anonymous"
 	th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
-	 <link
-      rel="stylesheet"
-      th:href="@{/webjars/font-awesome/6.1.1/css/all.css}"
-    />
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/6.1.1/css/all.css}" />
+
+
 
 </head>
 <body>
@@ -38,62 +39,69 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 			<div class="navbar-header ">
-				<a class="navbar-brand" th:href="@{/}" ><span><img src="/images/panda.png" class="rounded float-left" alt="logo" >  𝕊𝕙𝕠𝕣𝕥ℕ𝕖𝕨𝕤</span></a>
-				<button type="button" class="navbar-toggler"
-					data-bs-toggle="collapse" data-bs-target="#main-navbar">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<a class="navbar-brand" th:href="@{/}"><span><img
+						src="/images/panda.png" class="rounded float-left" alt="logo">
+						𝕊𝕙𝕠𝕣𝕥ℕ𝕖𝕨𝕤</span></a>
+
 			</div>
-			<div class="collapse navbar-collapse" id="main-navbar">
+			<button type="button" class="navbar-toggler ml-auto"
+				data-bs-toggle="collapse" data-bs-target="#main-navbar">
+				<span class="navbar-toggler-icon"> </span>
+			</button>
+			<div class="collapse navbar-collapse  " id="main-navbar">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
 					<li class="nav-item mt-1 mt-lg-0"><a class="nav-link active"
-						aria-current="page" th:href="@{/}" th:title="Home"> <span
-							th:text="Home">Home</span>
+						aria-current="page" th:href="@{/}" th:title="Home"><i
+							class="fa-solid fa-house fa-lg"></i> <span th:text="Home">Home</span>
 					</a></li>
 
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" id="categoriesDropdown"
-						th:href="@{/}" th:title="Categories" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"><span
+					<li class="nav-item dropdown"><a class="nav-link "
+						id="categoriesDropdown" th:href="@{/}" th:title="Categories"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+							class="fa-solid fa-grip fa-lg me-1"></i><span
 							th:text="Categories">Categories</span></a>
 						<div class="dropdown-menu" aria-labelledby="categoriesDropdown">
-							<a class="dropdown-item" th:href="@{/?tag=Sport}">Sport</a> <a
-								class="dropdown-item" th:href="@{/?tag=News}">News</a>
+							<a class="dropdown-item" th:href="@{/?tag=Sport}"><i
+								class="fa-solid fa-futbol"></i> Sport</a> <a class="dropdown-item"
+								th:href="@{/?tag=News}"><i class="fa-solid fa-newspaper"></i>
+								News</a>
 						</div></li>
 					<li class="nav-item dropdown" sec:authorize="isAuthenticated()"><a
-						class="nav-link dropdown-toggle" id="listsDropdown"
-						th:title="Lists" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false"><span th:text="Lists">Lists</span></a>
+						class="nav-link " id="listsDropdown" th:title="Lists"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+							class="fa-solid fa-list fa-lg me-1"></i><span th:text="Lists">Lists</span></a>
 
 						<div class="dropdown-menu" aria-labelledby="ListsDropdown">
 							<div th:each="list: ${userLists}">
-								<a class="dropdown-item" th:href="@{'/?list='+${list.id}}"
-									th:text="${list.name}"> text</a>
+								<a class="dropdown-item" th:href="@{'/?list='+${list.id}}"><i
+									class="fa-solid fa-angles-right me-2"></i><span
+									th:text="${list.name}"></span></a>
 							</div>
 
-							<a class="dropdown-item" th:href="@{/list/new}">+ Add new
-								List</a>
+							<a class="dropdown-item" th:href="@{/list/new}"><i
+								class="fa-solid fa-file-circle-plus"></i> Add new List</a>
 						</div></li>
 
 					<li class="nav-item"><a class="nav-link"
-						th:href="@{/settings}" th:title="Settings"> <span
-							th:text="Settings">Settings</span></a></li>
+						th:href="@{/settings}" th:title="Settings"><i
+							class="fa-solid fa-gear fa-lg"></i> <span th:text="Settings">Settings</span></a></li>
 
 
 					<li class="nav-item" sec:authorize="isAuthenticated()">
 
 						<form class="nav-link" th:action="@{/logout}" method="POST">
 							<button type="submit" name="Logout" class="btn-link"
-								value="Logout">
-								<span th:text="Logout">Logout</span>
+								value="Logout" title="Logout">
+								<i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
 							</button>
 						</form>
 
 
 					</li>
 					<li class="nav-item" sec:authorize="isAnonymous()"><a
-						class="nav-link" th:href="@{/login}"> <span th:text="Login">Login</span>
+						class="nav-link" th:href="@{/login}" title="Login"> <i
+							class="fa-solid fa-arrow-right-to-bracket fa-lg"></i>
 					</a></li>
 				</ul>
 			</div>

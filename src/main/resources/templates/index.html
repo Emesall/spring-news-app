@@ -6,12 +6,13 @@
 	th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 <head>
 <meta charset="UTF-8" />
-<title>News Aggregator</title>
+<title>Short News</title>
 
 
 </head>
 <body>
 	<div class="container">
+	
 		<div class="row ">
 			<div class="col-sm-3" th:each="feed: ${results}">
 				<article class="news">
@@ -90,8 +91,5 @@
 
 
 	</div>
-
-
-
 </body>
 </html>
