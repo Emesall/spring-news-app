@@ -91,6 +91,7 @@ public class UserController {
 				return FORGOT_PASSWORD_TEMPLATE;
 			} else {
 				try {
+					log.debug("Sending email to reset password...");
 					emailService.sendResetPasswordEmail(user, request.getContextPath(), request.getLocale());
 				} catch (Exception ex) {
 					return "redirect:/forgotPassword?problem";
@@ -146,6 +147,9 @@ public class UserController {
 			User user_1 = token.getUser();
 			user_1.setPassword(passwordEncoder, passwordForm.getPassword());
 			userService.saveUser(user_1);
+			//password changed, delete token
+			log.debug("Password changed succesfully, reset token deleted");
+			resetTokenService.deleteTokenById(token.getId());
 			return "redirect:/login?passChanged";
 		}
 
