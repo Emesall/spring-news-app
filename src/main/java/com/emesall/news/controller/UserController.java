@@ -110,8 +110,7 @@ public class UserController {
 
 		ResetPasswordToken resetToken = resetTokenService.getToken(token);
 
-		Instant instant = Instant.now();
-		if (resetToken.getExpirationDate().isBefore(instant)) {
+		if (resetTokenService.checkIfExpired(resetToken)) {
 			log.debug("Token expired");
 			return "redirect:/login?expired";
 		}

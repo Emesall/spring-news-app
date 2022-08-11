@@ -87,8 +87,7 @@ public class RegisterController {
 
 		VerificationToken verificationToken = verificationTokenService.getToken(token);
 		User user = verificationToken.getUser();
-		Instant instant = Instant.now();
-		if (verificationToken.getExpirationDate().isBefore(instant)) {
+		if (verificationTokenService.checkIfExpired(verificationToken)) {
 			log.debug("Token expired");
 			return "redirect:/login?expired";
 		}

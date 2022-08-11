@@ -8,4 +8,5 @@ public interface TokenService {
 
 	Token createAndSaveToken(User user,String token);
 	Token getToken(String token);
+	boolean checkIfExpired(Token token);
 }

@@ -6,10 +6,9 @@ import java.time.temporal.ChronoUnit;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.emesall.news.model.BaseEntity;
 import com.emesall.news.model.User;
@@ -30,7 +29,7 @@ public abstract class Token extends BaseEntity {
 	private static final int EXPIRATION = 60; //min
 
 	private String token;
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	private User user;
 	private Instant expirationDate;
 	

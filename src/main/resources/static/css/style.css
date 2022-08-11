@@ -37,7 +37,13 @@ label{
  }
 .navbar-header img{
        height: 100%;
+       opacity: 1;
+  		transition: .2s ease;
 }
+.navbar-header:hover img{
+   opacity: 0.5;
+}
+
 .navbar-toggler {
   float: right;
      border-color: white !important;
