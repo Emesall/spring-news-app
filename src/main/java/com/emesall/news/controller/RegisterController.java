@@ -1,7 +1,5 @@
 package com.emesall.news.controller;
 
-import java.time.Instant;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -69,9 +67,8 @@ public class RegisterController {
 			return USER_REGISTER_FORM;
 		else {
 
-			userService.saveUser(user);
-
 			// save user
+			userService.saveUser(user);
 
 			// new event to handle email sending
 			eventPublisher
@@ -95,7 +92,7 @@ public class RegisterController {
 		user.setEnabled(true);
 
 		userService.saveUser(user);
-		log.debug("User "+user.getEmail()+" enabled.");
+		log.debug("User " + user.getEmail() + " enabled.");
 		verificationTokenService.deleteTokenById(verificationToken.getId());
 		log.debug("Verification token deleted");
 		return "redirect:/login?enabled";
