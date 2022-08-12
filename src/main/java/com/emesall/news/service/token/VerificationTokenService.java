@@ -50,5 +50,10 @@ public class VerificationTokenService implements TokenService {
 			return true;
 		return false;
 	}
+	
+	@Override
+	public void deleteTokenById(Long id) {
+		tokenRepository.deleteById(id);
+	}
 
 }

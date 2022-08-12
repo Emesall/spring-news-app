@@ -95,6 +95,9 @@ public class RegisterController {
 		user.setEnabled(true);
 
 		userService.saveUser(user);
+		log.debug("User "+user.getEmail()+" enabled.");
+		verificationTokenService.deleteTokenById(verificationToken.getId());
+		log.debug("Verification token deleted");
 		return "redirect:/login?enabled";
 	}
 }

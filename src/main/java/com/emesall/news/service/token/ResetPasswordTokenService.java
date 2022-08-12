@@ -76,7 +76,7 @@ public class ResetPasswordTokenService implements TokenService {
 		log.debug("Reset password token existing");
 		return token;
 	}
-
+	@Override
 	public void deleteTokenById(Long id) {
 		tokenRepository.deleteById(id);
 	}
