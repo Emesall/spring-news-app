@@ -10,10 +10,9 @@
 
 	<div class="container">
 		<div class="row" style="margin-top: 20px">
-			<div th:if="${param.passtheSame}"
-				class="alert alert-danger text-center">The password must be different from previous one!</div>
-			<div th:if="${param.passWrong}"
-				class="alert alert-danger text-center">Passwords do not match.</div>
+			<div th:if="${#fields.hasErrors('${passwordForm.password}')}"
+				class="alert alert-danger text-center"
+				th:text=" ${#fields.errors('${passwordForm.password}')[0]}"></div>
 			<div th:if="${param.passChanged}"
 				class="alert alert-success text-center">Your password has been
 				successfully changed.</div>

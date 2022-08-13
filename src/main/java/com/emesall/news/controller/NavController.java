@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
-import com.emesall.news.service.UserService;
+import com.emesall.news.service.UserListService;
 
 @ControllerAdvice
 public class NavController {
 
-	private final UserService userService;
+	private final UserListService userListService;
 
 	@Autowired
-	public NavController(UserService userService) {
+	public NavController(UserListService userListService) {
 		super();
-		this.userService = userService;
+		this.userListService = userListService;
 	}
 	
 	
@@ -27,7 +27,7 @@ public class NavController {
 	@ModelAttribute("userLists")
 	public Set<UserList> getLists(@AuthenticationPrincipal User user) {
 		if (user != null) {
-			return userService.findListByUser(user);
+			return userListService.findListByUser(user);
 		}
 		return null;
 	}

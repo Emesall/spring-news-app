@@ -1,18 +1,24 @@
 package com.emesall.news.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.emesall.news.exception.NotFoundException;
+import com.emesall.news.model.Category;
 import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
-import com.emesall.news.service.UserService;
+import com.emesall.news.model.WebSite;
+import com.emesall.news.service.UserListService;
 import com.emesall.news.service.WebSiteService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,44 +27,55 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserListController {
 
-	private final UserService userService;
+	private final UserListService userListService;
 	private final WebSiteService webSiteService;
 
 	@Autowired
-	public UserListController(UserService userService, WebSiteService webSiteService) {
+	public UserListController(UserListService userListService, WebSiteService webSiteService) {
 		super();
-		this.userService = userService;
+		this.userListService = userListService;
 		this.webSiteService = webSiteService;
 		
 	}
 
-	
+	@ModelAttribute("map")
+	public MultiValueMap<Category, WebSite> getWebSites() {
+		return webSiteService.orderWebSitesByCategory();
+	}
+
 
 	@GetMapping("/list/new")
 	public String initNewList(Model model) {
 		model.addAttribute("list", new UserList());
-		model.addAttribute("map", webSiteService.orderWebSitesByCategory());
 
 		return "user/list";
 	}
 
 	@PostMapping("/list/update")
-	public String processList(@ModelAttribute("list") UserList userlist, @AuthenticationPrincipal User user) {
+	public String processList(@ModelAttribute("list") @Valid UserList userlist,BindingResult bindingResult, @AuthenticationPrincipal User user,Model model) {
 
-		log.debug("Saving/updating list in database..");
 		userlist.setUser(user);
-		userService.saveUserList(userlist);
+		//check if there is already list with the same name
+		if(userListService.checkIfUserListExists(user, userlist)) {
+			bindingResult.rejectValue("name", "TheSame.list.name");
+		}
+		
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("list", userlist);
+			return "user/list";
+		}
+		log.debug("Saving/updating list in database..");
+		userListService.saveUserList(userlist);
 		return "redirect:/settings";
 	}
 
 	@GetMapping("/list/{id}/edit")
 	public String initEditList(Model model, @PathVariable("id") Long listId, @AuthenticationPrincipal User user) {
-		UserList userList = userService.findListById(listId);
+		UserList userList = userListService.findListById(listId);
 		if (!userList.getUser().equals(user)) {
 			throw new NotFoundException("List not found");
 		}
 		model.addAttribute("list", userList);
-		model.addAttribute("map", webSiteService.orderWebSitesByCategory());
 
 		return "user/list";
 	}
@@ -66,7 +83,7 @@ public class UserListController {
 	@GetMapping("/list/{id}/delete")
 	public String deleteList(@PathVariable Long id, Model model) {
 		log.debug("Deleting list with ID: " + id);
-		userService.deleteUserListById(id);
+		userListService.deleteUserListById(id);
 		return "redirect:/settings";
 	}
 	

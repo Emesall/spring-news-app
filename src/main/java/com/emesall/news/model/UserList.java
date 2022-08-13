@@ -8,17 +8,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true,exclude = {"webSites"})
+@EqualsAndHashCode(callSuper = false,exclude = {"webSites"})
 public class UserList extends BaseEntity {
 
 	private static final long serialVersionUID = -1897286705997464492L;
 
+	@NotBlank
 	private String name;
 	
 	@ManyToOne

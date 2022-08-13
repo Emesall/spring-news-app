@@ -23,7 +23,7 @@ import com.emesall.news.model.User;
 import com.emesall.news.model.UserList;
 import com.emesall.news.service.CategoryService;
 import com.emesall.news.service.FeedService;
-import com.emesall.news.service.UserService;
+import com.emesall.news.service.UserListService;
 
 import lombok.Setter;
 
@@ -34,15 +34,15 @@ public class IndexController {
 
 	private final FeedService feedService;
 	private final CategoryService categoryService;
-	private final UserService userService;
+	private final UserListService userListService;
 	private int pageSize;
 
 	@Autowired
-	public IndexController(FeedService feedService, CategoryService categoryService, UserService userService) {
+	public IndexController(FeedService feedService, CategoryService categoryService, UserListService userListService) {
 		super();
 		this.feedService = feedService;
 		this.categoryService = categoryService;
-		this.userService = userService;
+		this.userListService = userListService;
 
 	}
 
@@ -60,7 +60,7 @@ public class IndexController {
 
 		// list of websites specified, data fetched only from them
 		if (list_id != null) {
-			UserList userList = userService.findListById(list_id);
+			UserList userList = userListService.findListById(list_id);
 			if (!userList.getUser().equals(user)) {
 				throw new NotFoundException("List not Found");
 			}

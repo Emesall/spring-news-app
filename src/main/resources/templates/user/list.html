@@ -8,6 +8,9 @@
 <body>
 
 	<div class="container">
+		<div th:if="${#fields.hasErrors('${list.name}')}"
+			class="alert alert-danger text-center mt-5"
+			th:text=" ${#fields.errors('${list.name}')[0]}"></div>
 		<div class="card shadow-lg ">
 			<div class="card-body p-5">
 				<h4 class="fs-4 card-title fw-bold mb-4 text-center">Add new
@@ -21,7 +24,7 @@
 						<div class="input-field">
 							<span class="far fa-user p-2"></span> <input id="listName"
 								type="text" name="listName" placeholder="List name..."
-								th:field="*{name}">
+								th:field="*{name}" required>
 
 
 						</div>

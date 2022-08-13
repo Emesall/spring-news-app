@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,7 +102,7 @@ public class ForgotPasswordController {
 
 		// changed password is previous one
 		if (passwordEncoder.matches(passwordForm.getPassword(), user_1.getPassword())) {
-			bindingResult.rejectValue("password", "error.password.old");
+			bindingResult.rejectValue("password", "TheSame.passwordForm.password");
 		}
 
 		if (bindingResult.hasErrors()) {
