@@ -65,26 +65,6 @@ label{
 }
 
 
-.nav-item form > button {
-	
-	font-family:NewsFont;
-	letter-spacing: 0.9px;
-  	text-decoration: inherit;
-  	font-weight: inherit;
-  	color:inherit;
-  	border-width: 0;
-  	background-color: inherit;
-  	font-size: 14px;
-  	display: inherit;
-
-  	
-}
-
-.nav-item form > button:hover {
-	color:inherit;
-
-  	
-}
 
 
 

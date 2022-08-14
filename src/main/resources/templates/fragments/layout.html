@@ -89,13 +89,12 @@
 
 					<li class="nav-item" sec:authorize="isAuthenticated()">
 
-						<form class="nav-link" th:action="@{/logout}" method="POST">
-							<button type="submit" name="Logout" class="btn-link"
-								value="Logout" title="Logout">
-								<i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
-							</button>
-						</form>
-
+						<form id="Logout" th:action="@{/logout}" method="POST"
+							style="display: none"></form> <a class="nav-link" href=""
+						onclick="document.getElementById('Logout').submit(); return false;"
+						title="Logout"> <i
+							class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>
+					</a>
 
 					</li>
 					<li class="nav-item" sec:authorize="isAnonymous()"><a
