@@ -10,6 +10,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 import com.emesall.news.model.BaseEntity;
 import com.emesall.news.model.User;
 
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Type", discriminatorType = DiscriminatorType.STRING)
+@ConfigurationProperties(prefix = "token")
 public abstract class Token extends BaseEntity {
 
 	private static final long serialVersionUID = 4144147332782838684L;
