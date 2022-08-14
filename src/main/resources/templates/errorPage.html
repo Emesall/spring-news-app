@@ -1,0 +1,23 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+<head>
+<meta charset="UTF-8" />
+<title>Error page</title>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-sm-center text-center mt-5">
+			<h1 th:text="${response}">sds</h1>
+			<p th:text="${message}">sds</p>
+		</div>
+	</div>
+	
+
+</body>
+</html>

@@ -28,19 +28,19 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		.antMatchers("/settings/**","/list/**")
-		.authenticated()
-		.antMatchers("/")
-		.permitAll()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.and()
-		.logout()
-		.deleteCookies("JSESSIONID")
-		.and()
-		.rememberMe()
-		.key("uniqueAndSecret");
+				.antMatchers("/settings/**", "/list/**")
+				.authenticated()
+				.antMatchers("/")
+				.permitAll()
+				.and()
+				.formLogin()
+				.loginPage("/login")
+				.and()
+				.logout()
+				.deleteCookies("JSESSIONID")
+				.and()
+				.rememberMe()
+				.key("uniqueAndSecret");
 		return http.build();
 	}
 	/*
