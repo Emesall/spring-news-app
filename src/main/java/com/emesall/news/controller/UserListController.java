@@ -80,7 +80,7 @@ public class UserListController {
 		return "user/list";
 	}
 	
-	@GetMapping("/list/{id}/delete")
+	@PostMapping("/list/{id}/delete")
 	public String deleteList(@PathVariable Long id, Model model) {
 		log.debug("Deleting list with ID: " + id);
 		userListService.deleteUserListById(id);

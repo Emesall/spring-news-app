@@ -127,11 +127,16 @@
 									<tbody>
 
 										<tr th:each="list: ${lists}">
-
+											<td>
+												<form th:id="@{'deleteForm'+${list.id}}"
+													th:action="@{'/list/'+${list.id}+'/delete'}" method="POST"
+													style="display: none"></form>
+											</td>
 
 											<td th:text="${list.name}">List1</td>
 
-											<td><a th:href="@{'/list/'+${list.id}+'/delete'}"
+											<td><a th:data-thing="'deleteForm'+${list.id}" href=""
+												onclick="document.getElementById(this.getAttribute('data-thing')).submit(); return false;"
 												class="delete float-end" data-toggle="modal"><i
 													class="fa-regular fa-trash-can p-2 fa-lg"></i></a> <a
 												th:href="@{'/list/'+${list.id}+'/edit'}"
