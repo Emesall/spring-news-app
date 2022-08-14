@@ -64,7 +64,16 @@ label{
 	
 }
 
+.form-check a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 700;
+}
 
+.form-check a:hover {
+    text-decoration: none;
+    color: rgb(96, 96, 96);
+}
 
 
 
@@ -290,6 +299,17 @@ table.table td a.edit:hover {
   font-size:1.27em;
   transition: 0.25s ease-out;
 
+}
+
+.activationLink a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 700;
+}
+
+.activationLink a:hover {
+    text-decoration: none;
+    color: rgb(96, 96, 96);
 }
 
 

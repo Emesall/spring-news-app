@@ -8,6 +8,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import com.emesall.news.model.User;
+import com.emesall.news.model.token.ResetPasswordToken;
+import com.emesall.news.model.token.VerificationToken;
 import com.emesall.news.service.SimpleEmailSender;
 import com.emesall.news.service.token.VerificationTokenService;
 
@@ -37,10 +39,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
 	private void confirmRegistration(OnRegistrationCompleteEvent event) {
 		User user=event.getUser();
-		String token = UUID.randomUUID().toString();
-
-		tokenService.createAndSaveToken(user, token);
-
+		//create new token or get existing one for user
+		VerificationToken token = tokenService.generateToken(user);
+		//prepare email
 		String emailAddress = user.getEmail();
 		String subject = "Registration Confirmation";
 		String confirmationUrl = event.getAppUrl() + "/confirmRegistration?token=" + token;

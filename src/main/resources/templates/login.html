@@ -10,21 +10,29 @@
 
 	<div class="container">
 		<div class="row justify-content-sm-center">
-			<div th:if="${param.error}" class="alert alert-danger text-center"
-				th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message</div>
-			<div th:if="${param.logout}" class="alert alert-success text-center">
+			
+			<div class="col-xxl-5 col-xl-6 col-lg-6 col-md-7 col-sm-9">
+			<div th:if="${param.error}" class="alert alert-danger text-center mt-5"
+				th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">Message
+			</div>
+			<div
+				th:if="${param.error} and ${#strings.equals(session['SPRING_SECURITY_LAST_EXCEPTION'].class,'class org.springframework.security.authentication.DisabledException')}"
+				class="text-center activationLink">
+				<a th:href="@{/sendActivationEmail}">Resend Activation Email</a>
+			</div>
+
+			<div th:if="${param.logout}" class="alert alert-success text-center mt-5">
 				You have been logged out.</div>
 			<div th:if="${param.registered}"
-				class="alert alert-success text-center">Successfully
+				class="alert alert-success text-center mt-5">Successfully
 				registered.</div>
 			<div th:if="${param.passChanged}"
-				class="alert alert-success text-center">Your password has been
+				class="alert alert-success text-center mt-5">Your password has been
 				successfully changed.</div>
-			<div th:if="${param.expired}" class="alert alert-danger text-center">Link
+			<div th:if="${param.expired}" class="alert alert-danger text-center mt-5">Link
 				expired.</div>
-			<div th:if="${param.enabled}"
-				class="alert alert-success text-center">Your account is active. Now you can log in.</div>
-			<div class="col-xxl-5 col-xl-6 col-lg-6 col-md-7 col-sm-9">
+			<div th:if="${param.enabled}" class="alert alert-success text-center mt-5">Your
+				account is active. Now you can log in.</div>
 
 				<div class="card shadow-lg">
 					<div class="card-body p-5">

@@ -30,7 +30,7 @@ public class EmailService {
 		
 		//create new token or get existing one for user
 		ResetPasswordToken token = tokenService.generateToken(user);
-		//preapre email
+		//prepare email
 		String subject = "Reset password";
 		String confirmationUrl = contextPath + "/changePassword?token=" + token.getToken();
 		String messageConfirmation = messages.getMessage("changePass", null, locale);

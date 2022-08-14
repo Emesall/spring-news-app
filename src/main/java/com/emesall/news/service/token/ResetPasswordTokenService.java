@@ -61,14 +61,14 @@ public class ResetPasswordTokenService implements TokenService {
 		ResetPasswordToken token = findByUser(user);
 		String token_str = UUID.randomUUID().toString();
 		if (token == null) { // no token, generate new one
-			log.debug("New reset password token generated");
+			log.debug("New reset password token generated for "+user.getEmail());
 			return createAndSaveToken(user, token_str);
 		}
 
 		// token expired, delete and generate new one
 		if (checkIfExpired(token)) {
 			deleteTokenById(token.getId());
-			log.debug("Reset password token expired and deleted.Generated new one");
+			log.debug("Reset password token expired and deleted.Generated new one for "+user.getEmail());
 			return createAndSaveToken(user, token_str);
 		}
 

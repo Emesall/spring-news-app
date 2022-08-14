@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.emesall.news.dto.RegistrationForm;
 import com.emesall.news.events.OnRegistrationCompleteEvent;
+import com.emesall.news.exception.NotFoundException;
 import com.emesall.news.mapper.RegisterFormToUserMapper;
 import com.emesall.news.model.User;
 import com.emesall.news.model.token.VerificationToken;
@@ -28,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RegisterController {
 
+	private static final String USER_ACTIVATION_EMAIL = "user/activationEmail";
 	private static final String USER_REGISTER_FORM = "user/registerForm";
 	private final RegisterFormToUserMapper formToUser;
 	private final PasswordEncoder encoder;
@@ -77,6 +79,36 @@ public class RegisterController {
 			return "redirect:/login?registered";
 		}
 
+	}
+
+	@GetMapping("/sendActivationEmail")
+	public String initSendActivationEmail() {
+
+		return USER_ACTIVATION_EMAIL;
+	}
+
+	@PostMapping("/sendActivationEmail")
+	public String processSendActivationEmail(@ModelAttribute("email") @Valid String email, BindingResult bindingResult,
+			HttpServletRequest request) {
+
+		try {
+			User user = userService.findUserByEmail(email);
+			if (bindingResult.hasErrors()) {
+				return USER_ACTIVATION_EMAIL;
+			} else {
+
+				log.debug("Sending email to activate account...");
+				// new event to handle email sending
+				eventPublisher.publishEvent(
+						new OnRegistrationCompleteEvent(user, request.getLocale(), request.getContextPath()));
+
+				return "redirect:/sendActivationEmail?sent";
+
+			}
+
+		} catch (NotFoundException exception) {
+			return "redirect:/sendActivationEmail?wrongEmail";
+		}
 	}
 
 	@GetMapping("/confirmRegistration")
