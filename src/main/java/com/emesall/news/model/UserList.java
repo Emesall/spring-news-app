@@ -26,6 +26,9 @@ public class UserList extends BaseEntity {
 	@ManyToOne
 	private User user;
 	
+	//list active as home page for user
+	private boolean active;
+	
 	@ManyToMany
 	@JoinTable(name = "userlist_webSite", joinColumns = @JoinColumn(name = "userlist_id"), inverseJoinColumns = @JoinColumn(name = "webSite_id"))
 	private Set<WebSite> webSites = new HashSet<>();

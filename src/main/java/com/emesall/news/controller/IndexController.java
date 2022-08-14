@@ -1,6 +1,7 @@
 package com.emesall.news.controller;
 
 import java.time.ZoneId;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,7 +53,7 @@ public class IndexController {
 			@RequestParam(required = false, value = "list") Long list_id, HttpServletRequest request,
 			@AuthenticationPrincipal User user) {
 
-		if (page == null || page==0) {
+		if (page == null || page == 0) {
 			page = 1;
 		}
 		Page<FeedDTO> results;
@@ -70,10 +71,17 @@ public class IndexController {
 		} else {
 			// no category given
 			if (cat_name == null) {
-				results = feedService.fetchAll(pageable); // feedDTO without publishedAgo time
+				// check if user has active list that will be shown on home page
+				Optional<UserList> activeList=userListService.returnActiveList(user);
+				if (activeList.isPresent()) {
+					results = feedService.fetchFromList(activeList.get(), pageable);
+				} else {
+					results = feedService.fetchAll(pageable); // fetchall
+				}
+
 			} else {
 				Category category = categoryService.findByName(cat_name);
-				results = feedService.fetchByCategory(category, pageable); // feedDTO without publishedAgo time
+				results = feedService.fetchByCategory(category, pageable); // fetchByCategory
 			}
 		}
 		// calculate and add publishedAgo time to every feed

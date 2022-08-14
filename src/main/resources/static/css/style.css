@@ -206,9 +206,11 @@ label{
 	
 }
 
+.test{
+	background: rgb(117, 255, 117);
+}
 
-
-table.table-striped.table-hover tbody tr:hover {
+table.tabled.table-hover tbody tr:hover {
 	background: #f5f5f5;
 }
 

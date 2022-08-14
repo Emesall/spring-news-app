@@ -122,11 +122,12 @@
 								</div>
 							</div>
 							<div class="col-sm-11">
-								<table class="table table-striped table-hover">
+								<table class="table table-hover">
 
 									<tbody>
 
-										<tr th:each="list: ${lists}">
+										<tr th:each="list: ${lists}"
+											th:class="${list.active} ? 'test' : ''">
 											<td>
 												<form th:id="@{'deleteForm'+${list.id}}"
 													th:action="@{'/list/'+${list.id}+'/delete'}" method="POST"
@@ -135,14 +136,18 @@
 
 											<td th:text="${list.name}">List1</td>
 
-											<td><a th:data-thing="'deleteForm'+${list.id}" href=""
-												onclick="document.getElementById(this.getAttribute('data-thing')).submit(); return false;"
-												class="delete float-end" data-toggle="modal"><i
-													class="fa-regular fa-trash-can p-2 fa-lg"></i></a> <a
-												th:href="@{'/list/'+${list.id}+'/edit'}"
+											<td><a th:href="${list.active} ?  @{'/list/'+${list.id}+'/setAsInactive'}:@{'/list/'+${list.id}+'/setAsActive'}"
 												class="edit float-end" data-toggle="modal"><i
+													th:class="${list.active} ? 'fa-regular fa-circle-xmark p-2 fa-lg' :'fa-regular fa-square-check p-2 fa-lg'"
+													title="Set List As Active on home page"></i></a> <a
+												th:data-thing="'deleteForm'+${list.id}" href=""
+												onclick="document.getElementById(this.getAttribute('data-thing')).submit(); return false;"
+												class="delete float-end" data-toggle="modal"
+												title="Delete List"><i
+													class="fa-regular fa-trash-can p-2 fa-lg"></i></a>
+												<a th:href="@{'/list/'+${list.id}+'/edit'}"
+												class="edit float-end" data-toggle="modal" title="Edit List"><i
 													class="fa-regular fa-pen-to-square p-2 fa-lg"></i></a></td>
-
 										</tr>
 									</tbody>
 								</table>

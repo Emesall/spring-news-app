@@ -1,5 +1,6 @@
 package com.emesall.news.service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -50,6 +51,21 @@ public class UserListService {
 			return true;
 
 		return false;
+	}
+
+	public UserList setListAsActive(UserList userList, User user) {
+
+		// deactivate previous active list
+		findListByUser(user).forEach(list -> list.setActive(false));
+		// activate new one
+		userList.setActive(true);
+
+		return userList;
+	}
+
+	public Optional<UserList> returnActiveList(User user) {
+
+		return findListByUser(user).stream().filter(list -> list.isActive()).findFirst();
 	}
 
 }
