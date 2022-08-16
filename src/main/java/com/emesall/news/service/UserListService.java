@@ -1,10 +1,12 @@
 package com.emesall.news.service;
 
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.emesall.news.exception.NotFoundException;
@@ -33,7 +35,9 @@ public class UserListService {
 	}
 
 	public Set<UserList> findListByUser(User user) {
-		return userListRepository.findListByUser(user).stream().collect(Collectors.toSet());
+		LinkedHashSet<UserList> set = new LinkedHashSet<>();
+		set.addAll(userListRepository.findListByUser(user, Sort.by(Sort.Order.asc("name").ignoreCase())));
+		return set;
 
 	}
 
