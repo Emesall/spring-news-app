@@ -16,6 +16,8 @@
 --background:#fff;
 --color:#222;
 }
+
+
 a{
 	font-family: NewsFont;
 	font-size: 14px;
@@ -41,6 +43,15 @@ label{
   		transition: .2s ease;
 }
 .navbar-header:hover img{
+   opacity: 0.5;
+}
+
+.footer-img{
+   
+       opacity: 1;
+  		transition: .2s ease;
+}
+.footer-img:hover{
    opacity: 0.5;
 }
 
@@ -326,4 +337,11 @@ table.table td a.edit:hover {
  }
 
 
-
+.git-link{
+	
+	color:var(--black)!important;
+	
+}
+.git-link:hover{
+   opacity: 0.5;
+}
