@@ -32,12 +32,15 @@ public class FeedController {
 			//iterate through all sites
 			for (WebSite site : sites) {
 				//fetch only new news from particular site 
+				if(site.getCategory().getName().equals("Business")) //for tests todelete
+				{
 				List<Feed> feeds = feedService.readNewFeeds(site);
+				
 				//save every new feed in DB
 				for (Feed f : feeds) {
 					feedService.save(f);
 				}
-
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

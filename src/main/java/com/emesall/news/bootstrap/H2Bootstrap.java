@@ -57,7 +57,7 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 			addCategories();
 			addWebsites();
 			addList();
-			// createRandomFeed(3);
+			//createRandomFeed(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -104,36 +104,55 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	}
 
 	private void addWebsites() throws MalformedURLException {
+		webSiteRepository.save(createWebSite("https://www.skysports.com/rss/12040", "Sport"));
+		webSiteRepository.save(createWebSite("https://www.90min.com/posts.rss", "Sport"));
+		webSiteRepository.save(createWebSite("http://feeds.bbci.co.uk/news/world/rss.xml", "News"));
+		webSiteRepository.save(createWebSite("https://feeds.feedburner.com/euronews/en/home/", "News"));
+		webSiteRepository.save(createWebSite("https://www.makingsenseofcents.com/feed", "Finance"));
+		webSiteRepository.save(createWebSite("https://www.ft.com/world?format=rss", "Finance"));
+		webSiteRepository.save(createWebSite("https://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC", "Health"));
+		webSiteRepository.save(createWebSite("https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/section/health/rss.xml", "Health"));
+		webSiteRepository.save(createWebSite("https://www.insider.co.uk/all-about/economy/?service=rss", "Business"));
+		webSiteRepository.save(createWebSite("https://www.business-live.co.uk/?service=rss", "Business"));
+		webSiteRepository.save(createWebSite("https://mashable.com/feeds/rss/all", "Technology"));
+		webSiteRepository.save(createWebSite("https://gizmodo.com/rss", "Technology"));
+		webSiteRepository.save(createWebSite("https://loudwire.com/feed/", "Music"));
+		webSiteRepository.save(createWebSite("https://www.billboard.com/feed/", "Music"));
+		webSiteRepository.save(createWebSite("https://therecipecritic.com/feed/", "Food"));
+		webSiteRepository.save(createWebSite("https://minimalistbaker.com/feed/", "Food"));
+		webSiteRepository.save(createWebSite("https://travelfreak.com/feed/", "Travel"));
+		webSiteRepository.save(createWebSite("https://www.nomadicmatt.com/feed/", "Travel"));
+		
+		
 
+	}
+	
+	private WebSite createWebSite(String urlName,String catName) throws MalformedURLException {
 		WebSite page = new WebSite();
-		URL url = new URL("https://www.skysports.com/rss/12040");
+		URL url = new URL(urlName);
 		page.setUrl(url);
-		page.setCategory(categoryRepository.findByName("Sport").get());
-		webSiteRepository.save(page);
-
-		WebSite page2 = new WebSite();
-		URL url2 = new URL("http://feeds.bbci.co.uk/news/world/rss.xml");
-		page2.setUrl(url2);
-		page2.setCategory(categoryRepository.findByName("News").get());
-		webSiteRepository.save(page2);
-
-		WebSite page3 = new WebSite();
-		URL url3 = new URL("https://www.mykhel.com/rss/sports-%20wwe-fb.xml");
-		page3.setUrl(url3);
-		page3.setCategory(categoryRepository.findByName("Sport").get());
-		webSiteRepository.save(page3);
+		page.setCategory(categoryRepository.findByName(catName).get());
+		return page;
+	}
+	
+	private Category createCategory(String name) {
+		Category cat1 = new Category();
+		cat1.setName(name);
+		return cat1;
 	}
 
 	private void addCategories() {
-		Category cat1 = new Category();
-		cat1.setName("Sport");
-		Category cat2 = new Category();
-		cat2.setName("News");
-		Category cat3 = new Category();
-		cat3.setName("Olympic");
-		categoryRepository.save(cat1);
-		categoryRepository.save(cat2);
-		categoryRepository.save(cat3);
+		
+		categoryRepository.save(createCategory("Sport"));
+		categoryRepository.save(createCategory("News"));
+		categoryRepository.save(createCategory("Finance"));
+		categoryRepository.save(createCategory("Health"));
+		categoryRepository.save(createCategory("Business"));
+		categoryRepository.save(createCategory("Technology"));
+		categoryRepository.save(createCategory("Music"));
+		categoryRepository.save(createCategory("Food"));
+		categoryRepository.save(createCategory("Travel"));
+	
 	}
 
 	private void createRandomFeed(int num) throws URISyntaxException {

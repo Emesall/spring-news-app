@@ -61,10 +61,22 @@
 							class="fa-solid fa-grip fa-lg me-1"></i><span
 							th:text="Categories">Categories</span></a>
 						<div class="dropdown-menu" aria-labelledby="categoriesDropdown">
-							<a class="dropdown-item" th:href="@{/?tag=Sport}"><i
-								class="fa-solid fa-futbol"></i> Sport</a> <a class="dropdown-item"
+							<a class="dropdown-item" th:href="@{/?tag=Business}"><i
+								class="fa-solid fa-business-time"></i> Business</a> <a
+								class="dropdown-item" th:href="@{/?tag=Finance}"><i
+								class="fa-solid fa-coins"></i> Finance</a> <a class="dropdown-item"
+								th:href="@{/?tag=Food}"><i class="fa-solid fa-utensils"></i>
+								Food</a> <a class="dropdown-item" th:href="@{/?tag=Health}"><i
+								class="fa-solid fa-briefcase-medical"></i> Health</a> <a
+								class="dropdown-item" th:href="@{/?tag=Music}"><i
+								class="fa-solid fa-music"></i> Music</a> <a class="dropdown-item"
 								th:href="@{/?tag=News}"><i class="fa-solid fa-newspaper"></i>
-								News</a>
+								News</a> <a class="dropdown-item" th:href="@{/?tag=Sport}"><i
+								class="fa-solid fa-futbol"></i> Sport</a> <a class="dropdown-item"
+								th:href="@{/?tag=Technology}"><i
+								class="fa-solid fa-microchip"></i> Technology</a> <a
+								class="dropdown-item" th:href="@{/?tag=Travel}"><i
+								class="fa-solid fa-plane"></i> Travel</a>
 						</div></li>
 					<li class="nav-item dropdown" sec:authorize="isAuthenticated()"><a
 						class="nav-link " id="listsDropdown" th:title="Lists"
@@ -127,7 +139,7 @@
 
 
 			<ul class="justify-content-end list-unstyled ">
-				<li ><a class="git-link" th:target="_blank"
+				<li><a class="git-link" th:target="_blank"
 					href="https://github.com/Emesall" title="Github"><i
 						class="fa-brands fa-github fa-lg"></i></a></li>
 			</ul>

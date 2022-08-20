@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -98,11 +97,9 @@ public class FeedService {
 	}
 
 	private Page<Feed> getFeedsByCategory(Category category, Pageable pageable) {
-		List<Feed> feeds = category.getFeeds().stream().collect(Collectors.toList());
-		int start = (int) pageable.getOffset();
-		int end = Math.min((start + pageable.getPageSize()), feeds.size());
-		Page<Feed> page = new PageImpl<Feed>(feeds.subList(start, end), pageable, feeds.size());
-		return page;
+		List<Category> categories=new ArrayList<Category>();
+		categories.add(category);
+		return feedRepository.findByCategoriesIn(categories, pageable);
 	}
 	
 	public Page<FeedDTO> fetchByCategory(Category category, Pageable pageable) {
