@@ -106,22 +106,21 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 	private void addWebsites() throws MalformedURLException {
 		webSiteRepository.save(createWebSite("https://www.skysports.com/rss/12040", "Sport"));
 		webSiteRepository.save(createWebSite("https://www.90min.com/posts.rss", "Sport"));
-		webSiteRepository.save(createWebSite("http://feeds.bbci.co.uk/news/world/rss.xml", "News"));
-		webSiteRepository.save(createWebSite("https://feeds.feedburner.com/euronews/en/home/", "News"));
-		webSiteRepository.save(createWebSite("https://www.makingsenseofcents.com/feed", "Finance"));
-		webSiteRepository.save(createWebSite("https://www.ft.com/world?format=rss", "Finance"));
+		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/news/articles.rss", "News"));
+		webSiteRepository.save(createWebSite("https://feeds.washingtonpost.com/rss/world", "News"));
+		webSiteRepository.save(createWebSite("https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml", "Finance"));
+		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/money/index.rss", "Finance"));
 		webSiteRepository.save(createWebSite("https://rssfeeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC", "Health"));
-		webSiteRepository.save(createWebSite("https://www.nytimes.com/svc/collections/v1/publish/http://www.nytimes.com/section/health/rss.xml", "Health"));
+		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/health/index.rss", "Health"));
 		webSiteRepository.save(createWebSite("https://www.insider.co.uk/all-about/economy/?service=rss", "Business"));
 		webSiteRepository.save(createWebSite("https://www.business-live.co.uk/?service=rss", "Business"));
-		webSiteRepository.save(createWebSite("https://mashable.com/feeds/rss/all", "Technology"));
-		webSiteRepository.save(createWebSite("https://gizmodo.com/rss", "Technology"));
-		webSiteRepository.save(createWebSite("https://loudwire.com/feed/", "Music"));
-		webSiteRepository.save(createWebSite("https://www.billboard.com/feed/", "Music"));
-		webSiteRepository.save(createWebSite("https://therecipecritic.com/feed/", "Food"));
-		webSiteRepository.save(createWebSite("https://minimalistbaker.com/feed/", "Food"));
-		webSiteRepository.save(createWebSite("https://travelfreak.com/feed/", "Travel"));
-		webSiteRepository.save(createWebSite("https://www.nomadicmatt.com/feed/", "Travel"));
+		webSiteRepository.save(createWebSite("https://www.techradar.com/rss", "Technology"));
+		webSiteRepository.save(createWebSite("https://www.wired.com/feed/category/science/latest/rss", "Technology"));
+		webSiteRepository.save(createWebSite("https://pitchfork.com/feed/feed-news/rss", "Music"));
+		webSiteRepository.save(createWebSite("https://www.music-news.com/rss/UK/news?includeCover=true", "Music"));
+		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/femail/food/index.rss", "Food"));
+		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/travel/index.rss", "Travel"));
+		webSiteRepository.save(createWebSite("https://travelweekly.co.uk/rss/news.xml", "Travel"));
 		
 		
 

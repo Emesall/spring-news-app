@@ -26,21 +26,20 @@ public class FeedController {
 
 	@GetMapping("/fetch")
 	public String fetchFeed() {
-		//get all websites that we get data from
+		// get all websites that we get data from
 		List<WebSite> sites = webSiteService.findAll();
 		try {
-			//iterate through all sites
+			// iterate through all sites
 			for (WebSite site : sites) {
-				//fetch only new news from particular site 
-				if(site.getCategory().getName().equals("Business")) //for tests todelete
-				{
+				// fetch only new news from particular site
+
 				List<Feed> feeds = feedService.readNewFeeds(site);
-				
-				//save every new feed in DB
+
+				// save every new feed in DB
 				for (Feed f : feeds) {
 					feedService.save(f);
 				}
-				}
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
