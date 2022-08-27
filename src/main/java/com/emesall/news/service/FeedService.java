@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.emesall.news.dto.FeedDTO;
@@ -83,13 +84,13 @@ public class FeedService {
 	// check if fetched entry is new
 	private boolean isFeedNew(WebSite webSite, Instant date) {
 
-		Set<Feed> feeds = webSite.getFeeds();
+		Set<Feed> feeds = feedRepository.findByWebSite(webSite,Sort.by("instant").descending());
+	
 		// if set is empty, there is no feed at all so webSite must be new
 		if (feeds.isEmpty())
 			return true;
 		// find latest feed (first in Set)
 		Instant latestDate = feeds.iterator().next().getInstant();
-
 		if (date.compareTo(latestDate) > 0)
 			return true; // feed is newer than the latest in DB
 
