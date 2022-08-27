@@ -111,5 +111,13 @@ public class FeedService {
 		feeds.forEach(f -> f.setPublishedAgo(PrettyTime.of(locale).printRelative(f.getInstant(), zone)));
 
 	}
+	
+	public List<Feed> findOlderNews(Instant instant){
+		return feedRepository.findByInstantLessThan(instant);
+	}
+	
+	public void deleteNews(List<Feed> feeds) {
+		feeds.forEach(feed->feedRepository.delete(feed));
+	}
 
 }

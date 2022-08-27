@@ -1,5 +1,6 @@
 package com.emesall.news.repository;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,5 +15,6 @@ public interface FeedRepository extends JpaRepository<Feed, Long> {
 
 	Page<Feed> findByWebSiteIn(List<WebSite> websites,Pageable pageable);
 	Page<Feed> findByCategoriesIn(List<Category> categories,Pageable pageable);
+	List<Feed> findByInstantLessThan(Instant instant);
 	
 }
