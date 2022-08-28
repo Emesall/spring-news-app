@@ -134,8 +134,11 @@ class FeedServiceTest {
 		category.setId(ID);
 		category.setName(CAT_NAME);
 		category.setFeeds(feeds.stream().collect(Collectors.toSet()));
+		
+		Page<Feed> page = new PageImpl<>(feeds, pageable, feeds.size());
 
 		when(feedMapper.feedToDto(any(Feed.class))).thenReturn(feedDTO);
+		when(feedRepository.findByCategoriesIn(any(List.class), any(Pageable.class))).thenReturn(page);
 
 		// when
 		Page<FeedDTO> fetchedFeed = feedService.fetchByCategory(category, pageable);

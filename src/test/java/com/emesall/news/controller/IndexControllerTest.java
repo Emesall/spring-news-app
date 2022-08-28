@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,8 +30,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.emesall.news.dto.FeedDTO;
 import com.emesall.news.model.Category;
+import com.emesall.news.model.User;
 import com.emesall.news.service.CategoryService;
 import com.emesall.news.service.FeedService;
+import com.emesall.news.service.UserListService;
 
 @EnableConfigurationProperties
 class IndexControllerTest {
@@ -60,6 +63,8 @@ class IndexControllerTest {
 	
 	@Mock
 	CategoryService categoryService;
+	@Mock
+	UserListService listService;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -84,6 +89,7 @@ class IndexControllerTest {
 		feeds.add(feedDTO2);
 		Page<FeedDTO> page = new PageImpl<>(feeds, pageable, feeds.size());
 		when(feedService.fetchAll(any(Pageable.class))).thenReturn(page);
+		when(listService.returnActiveList(any(User.class))).thenReturn(Optional.empty());
 
 		indexController.setPageSize(8);
 		// then

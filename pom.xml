@@ -148,7 +148,7 @@
 		</plugins>
 	</build>
 	<scm>
-		<developerConnection>scm:git:https://github.com/Emesall/spring-udemy-petclinic.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/Emesall/spring-news-app</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
