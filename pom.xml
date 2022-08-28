@@ -10,6 +10,7 @@
 	<groupId>com.emesall</groupId>
 	<artifactId>spring-news-app</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>spring-news-app</name>
 	<description>Spring News Aggregator </description>
 	<properties>
