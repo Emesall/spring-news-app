@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.emesall</groupId>
 	<artifactId>spring-news-app</artifactId>
-	<version>1.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-news-app</name>
 	<description>Spring News Aggregator </description>
 	<properties>
@@ -149,7 +149,7 @@
 	</build>
 	<scm>
 		<developerConnection>scm:git:https://github.com/Emesall/spring-news-app</developerConnection>
-		<tag>ver</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 </project>
