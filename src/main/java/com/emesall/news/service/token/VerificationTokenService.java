@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.emesall.news.exception.NotFoundException;
 import com.emesall.news.model.User;
-import com.emesall.news.model.token.ResetPasswordToken;
 import com.emesall.news.model.token.Token;
 import com.emesall.news.model.token.VerificationToken;
 import com.emesall.news.repository.token.VerificationTokenRepository;

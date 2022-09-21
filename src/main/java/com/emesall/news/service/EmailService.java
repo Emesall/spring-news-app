@@ -36,7 +36,7 @@ public class EmailService {
 		String messageConfirmation = messages.getMessage("changePass", null, locale);
 		String welcomeMessage = messages.getMessage("welcome", null, locale);
 		String message = welcomeMessage + " " + user.getFirstName() + " " + user.getLastName() + "!" + "\r\n"
-				+ messageConfirmation + "\r\n" + "http://localhost:8080" + confirmationUrl;
+				+ messageConfirmation + "\r\n" + "https://fastnews.fun" + confirmationUrl;
 		emailSender.sendEmail(user.getEmail(), subject, message);
 
 	}

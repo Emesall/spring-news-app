@@ -231,3 +231,36 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-212]
 2022-09-21 19:19:38.281  INFO 5500 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2022-09-21 19:19:38.282  INFO 5500 --- [RMI TCP Connection(4)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-09-21 19:22:34.194  INFO 21336 --- [main] c.e.news.SpringNewsAppApplicationTests   : Starting SpringNewsAppApplicationTests using Java 17.0.2 on ZSHWAE000361 with PID 21336 (started by EBZAE in C:\Users\EBZAE\eclipse-workspace\SPRING\spring-news-app)
+2022-09-21 19:22:34.198 DEBUG 21336 --- [main] c.e.news.SpringNewsAppApplicationTests   : Running with Spring Boot v2.7.0, Spring v5.3.20
+2022-09-21 19:22:34.198  INFO 21336 --- [main] c.e.news.SpringNewsAppApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2022-09-21 19:22:35.134  INFO 21336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-09-21 19:22:35.252  INFO 21336 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 103 ms. Found 7 JPA repository interfaces.
+2022-09-21 19:22:36.051  INFO 21336 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-21 19:22:36.330  INFO 21336 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-21 19:22:36.419  INFO 21336 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-09-21 19:22:36.499  INFO 21336 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-09-21 19:22:36.557  INFO 21336 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-09-21 19:22:36.746  INFO 21336 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-09-21 19:22:37.527  INFO 21336 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-09-21 19:22:37.537  INFO 21336 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-09-21 19:22:38.711  INFO 21336 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@68c9cf93, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2715b3ea, org.springframework.security.web.context.SecurityContextPersistenceFilter@6c07666f, org.springframework.security.web.header.HeaderWriterFilter@6b3bcab7, org.springframework.security.web.csrf.CsrfFilter@67f8586f, org.springframework.security.web.authentication.logout.LogoutFilter@1285ec6, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@74161ed7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@68fd0fba, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3f9e38d4, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@3bb59485, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30130a31, org.springframework.security.web.session.SessionManagementFilter@7d28d525, org.springframework.security.web.access.ExceptionTranslationFilter@7752f9fe, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@642ebd4c]
+2022-09-21 19:22:38.739  WARN 21336 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/h2-console/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2022-09-21 19:22:38.740  INFO 21336 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/h2-console/**']
+2022-09-21 19:22:39.071  WARN 21336 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-09-21 19:22:39.388  INFO 21336 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2022-09-21 19:22:40.522 DEBUG 21336 --- [scheduling-1] c.e.news.scheduled.CleanDBScheduledTask  : Finding old news: 0
+2022-09-21 19:22:40.523 DEBUG 21336 --- [scheduling-1] c.e.news.scheduled.CleanDBScheduledTask  : Deleting old news: 0
+2022-09-21 19:22:40.524 DEBUG 21336 --- [scheduling-1] c.e.n.scheduled.FetchNewsScheduledTask   : Fetching new news: 2022-09-21T17:22:40.523549400Z
+2022-09-21 19:22:40.789  INFO 21336 --- [main] c.e.news.SpringNewsAppApplicationTests   : Started SpringNewsAppApplicationTests in 6.998 seconds (JVM running for 11.5)
+2022-09-21 19:22:40.832  INFO 21336 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-09-21 19:22:40.833  INFO 21336 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2022-09-21 19:22:40.835  WARN 21336 --- [SpringApplicationShutdownHook] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 90121, SQLState: 90121
+2022-09-21 19:22:40.835 ERROR 21336 --- [SpringApplicationShutdownHook] o.h.engine.jdbc.spi.SqlExceptionHelper   : Baza danych jest ju¿ zamkniêta (aby zablokowaæ samoczynne zamykanie podczas zamkniêcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
+Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-212]
+2022-09-21 19:22:40.836  WARN 21336 --- [SpringApplicationShutdownHook] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 90121, SQLState: 90121
+2022-09-21 19:22:40.836 ERROR 21336 --- [SpringApplicationShutdownHook] o.h.engine.jdbc.spi.SqlExceptionHelper   : Baza danych jest ju¿ zamkniêta (aby zablokowaæ samoczynne zamykanie podczas zamkniêcia VM dodaj ";DB_CLOSE_ON_EXIT=FALSE" do URL bazy danych)
+Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-212]
+2022-09-21 19:22:40.837  WARN 21336 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'entityManagerFactory': org.hibernate.exception.JDBCConnectionException: Unable to release JDBC Connection used for DDL execution
+2022-09-21 19:22:40.838  INFO 21336 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-09-21 19:22:40.840  INFO 21336 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

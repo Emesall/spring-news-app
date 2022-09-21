@@ -44,11 +44,11 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		//prepare email
 		String emailAddress = user.getEmail();
 		String subject = "Registration Confirmation";
-		String confirmationUrl = event.getAppUrl() + "/confirmRegistration?token=" + token;
+		String confirmationUrl = event.getAppUrl() + "/confirmRegistration?token=" + token.getToken();
 		String messageConfirmation = messages.getMessage("regSucc", null, event.getLocale());
 		String welcomeMessage = messages.getMessage("welcome", null, event.getLocale());
 		String message = welcomeMessage + " " + user.getFirstName() + " " + user.getLastName() + "!" + "\r\n"
-				+ messageConfirmation + "\r\n" + "http://localhost:8080" + confirmationUrl;
+				+ messageConfirmation + "\r\n" + "https://fastnews.fun" + confirmationUrl;
 		try {
 			emailSender.sendEmail(emailAddress, subject, message);
 		} catch (Exception ex) {
