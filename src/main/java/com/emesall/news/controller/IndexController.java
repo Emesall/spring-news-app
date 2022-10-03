@@ -1,6 +1,7 @@
 package com.emesall.news.controller;
 
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,7 +86,7 @@ public class IndexController {
 			}
 		}
 		// calculate and add publishedAgo time to every feed
-		feedService.publishedAgo(results, request.getLocale(), ZoneId.systemDefault());
+		feedService.publishedAgo(results, Locale.ENGLISH, ZoneId.systemDefault());
 
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", results.getTotalPages());

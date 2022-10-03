@@ -28,11 +28,11 @@ public class FeedController {
 	public String fetchFeed() {
 		// get all websites that we get data from
 		List<WebSite> sites = webSiteService.findAll();
+		
 		try {
 			// iterate through all sites
 			for (WebSite site : sites) {
 				// fetch only new news from particular site
-
 				List<Feed> feeds = feedService.readNewFeeds(site);
 
 				// save every new feed in DB
