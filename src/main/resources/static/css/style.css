@@ -33,12 +33,11 @@ label{
 	font-size:14px;
 }
 .navbar-header{
-        height: 50px;
-        display: flex;
-  justify-content: space-between;
+        height: 45px;
+
  }
 .navbar-header img{
-       height: 100%;
+       height: 90%;
        opacity: 1;
   		transition: .2s ease;
 }
@@ -67,11 +66,13 @@ label{
     box-shadow: none!important;
 }
 
+
 .nav-item{
 
 	letter-spacing: 0.9px;
 	font-weight: bold;
 	color:var(--black);
+	box-shadow: none!important;
 	
 }
 
@@ -326,15 +327,9 @@ table.table td a.edit:hover {
 }
 
 
- @media (min-width:480px)
- { .dropdown:hover .dropdown-menu 	{
-    	display: block;
-    	margin-top: 0; 
- 	}
-	.dropdown-item a:active {
-    	color: white;
-	} 
- }
+
+
+ 
 
 
 .git-link{
@@ -342,6 +337,11 @@ table.table td a.edit:hover {
 	color:var(--black)!important;
 	
 }
+
+
 .git-link:hover{
    opacity: 0.5;
 }
+
+  
+
