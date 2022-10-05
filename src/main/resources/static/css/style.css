@@ -114,6 +114,12 @@ label{
 	margin: 0 auto;
 	font-family:DateFont;
 }
+
+.news_img a:hover{
+	opacity: 80%;
+	transition: 0.25s ease-out;
+	
+}
 .news-header time{
 	font-weight: bold;
 }

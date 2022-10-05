@@ -21,8 +21,12 @@
 							<a th:href="${feed.uri}" th:target="_blank"
 								th:text="${feed.title}">Title</a>
 						</h3>
-						<img th:src="${feed.imageUrl}" width="300px"
-							onerror="this.style.display='none'">
+						<div class="news_img">
+							<a th:href="${feed.uri}" th:target="_blank">
+								<img th:src="${feed.imageUrl}" width="300px"
+								onerror="this.style.display='none'">
+							</a>
+						</div>
 						<hr />
 						<time th:text="${feed.publishedAgo}">Thursday, June 12,
 							2022</time>
