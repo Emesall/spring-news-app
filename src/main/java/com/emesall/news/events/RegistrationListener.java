@@ -1,14 +1,11 @@
 package com.emesall.news.events;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import com.emesall.news.model.User;
-import com.emesall.news.model.token.ResetPasswordToken;
 import com.emesall.news.model.token.VerificationToken;
 import com.emesall.news.service.SimpleEmailSender;
 import com.emesall.news.service.token.VerificationTokenService;

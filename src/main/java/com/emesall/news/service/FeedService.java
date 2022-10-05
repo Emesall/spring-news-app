@@ -69,7 +69,8 @@ public class FeedService {
 		ArrayList<Feed> feeds = new ArrayList<>();
 		for (Object o : feed.getEntries()) {
 			SyndEntry entry = (SyndEntry) o;
-			if (isFeedNew(webSite, entry.getPublishedDate().toInstant())) {
+			if (isFeedNew(webSite, entry)) {
+			
 				Feed parsedFeed = entryToFeed.entryToFeed(entry);
 				parsedFeed.getCategories().add(webSite.getCategory());
 				parsedFeed.setWebSite(webSite);
@@ -82,20 +83,19 @@ public class FeedService {
 	}
 
 	// check if fetched entry is new
-	private boolean isFeedNew(WebSite webSite, Instant date) {
+	private boolean isFeedNew(WebSite webSite, SyndEntry entry) {
 
 		Set<Feed> feeds = feedRepository.findByWebSite(webSite,Sort.by("instant").descending());
-	
-		// if set is empty, there is no feed at all so webSite must be new
-		if (feeds.isEmpty())
-			return true;
-		// find latest feed (first in Set)
-		Instant latestDate = feeds.iterator().next().getInstant();
-		if (date.compareTo(latestDate) > 0)
-			return true; // feed is newer than the latest in DB
+		for(Feed feed:feeds) {
 
-		return false; // feed is already in DB
+			if(feed.getUri().toString().equals(entry.getLink()))
+			{
+				return false; // feed is already in DB
+			}
+		}
+		return true; // feed is new
 	}
+
 
 	private Page<Feed> getFeedsByCategory(Category category, Pageable pageable) {
 		List<Category> categories=new ArrayList<Category>();

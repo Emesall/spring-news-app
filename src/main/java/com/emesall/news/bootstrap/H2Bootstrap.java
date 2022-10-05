@@ -122,7 +122,6 @@ public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		webSiteRepository.save(createWebSite("https://www.music-news.com/rss/UK/news?includeCover=true", "Music"));
 		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/femail/food/index.rss", "Food"));
 		webSiteRepository.save(createWebSite("https://www.dailymail.co.uk/travel/index.rss", "Travel"));
-		webSiteRepository.save(createWebSite("https://travelweekly.co.uk/rss/news.xml", "Travel"));
 		
 		
 
