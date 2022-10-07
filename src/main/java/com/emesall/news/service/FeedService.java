@@ -86,6 +86,7 @@ public class FeedService {
 	private boolean isFeedNew(WebSite webSite, SyndEntry entry) {
 
 		Set<Feed> feeds = feedRepository.findByWebSite(webSite,Sort.by("instant").descending());
+		
 		for(Feed feed:feeds) {
 
 			if(feed.getUri().toString().equals(entry.getLink()))

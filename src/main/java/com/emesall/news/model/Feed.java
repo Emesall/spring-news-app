@@ -35,6 +35,7 @@ public class Feed extends BaseEntity {
 	private URI uri;
 	@ManyToOne
 	private WebSite webSite;
+	@Lob
 	private String imageUrl;
 	
 	@ManyToMany

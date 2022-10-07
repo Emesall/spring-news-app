@@ -32,15 +32,16 @@ public class FetchNewsScheduledTask {
 	@Scheduled(fixedRate = UPDATETIME)
 	public void fetchFeed() {
 		// get all websites that we get data from
-		log.debug("Fetching new news: " + Instant.now());
+		
 		List<WebSite> sites = webSiteService.findAll();
 		try {
 			// iterate through all sites
 			for (WebSite site : sites) {
+				log.debug("Fetching new news from : "+site.getUrl());
 				// fetch only new news from particular site
 
 				List<Feed> feeds = feedService.readNewFeeds(site);
-
+				log.debug("Number of news from : "+site.getUrl()+" " + feeds.size());
 				// save every new feed in DB
 				for (Feed f : feeds) {
 					feedService.save(f);

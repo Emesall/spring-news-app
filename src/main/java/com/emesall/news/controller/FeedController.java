@@ -11,7 +11,10 @@ import com.emesall.news.model.WebSite;
 import com.emesall.news.service.FeedService;
 import com.emesall.news.service.WebSiteService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class FeedController {
 
 	private final FeedService feedService;
@@ -33,8 +36,12 @@ public class FeedController {
 			// iterate through all sites
 			for (WebSite site : sites) {
 				// fetch only new news from particular site
+				log.debug("Fetching new news from : "+site.getUrl());
 				List<Feed> feeds = feedService.readNewFeeds(site);
 
+				// fetch only new news from particular site
+
+				log.debug("Number of news from : "+site.getUrl()+" " + feeds.size());
 				// save every new feed in DB
 				for (Feed f : feeds) {
 					feedService.save(f);
